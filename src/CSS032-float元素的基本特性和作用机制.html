@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>CSS032</title>
+    <!--
+        1、元素一旦设置了float属性，则除 inline-table 元素会转变为 table 元素，其他的统统都会被转换为 block 元素；
+
+        2、float 元素的特性：
+           • 包裹性(包裹和自适应性);
+           • 块状化并格式化上下文;
+           • 破坏文档流;
+           • 没有任何 margin 合并;
+
+        3、“文字环绕效果” 是由两个特性(即“父级高度塌陷”和“行框盒子区域限制”)共同作用的结果:
+           a)“高度塌陷”让跟随的内容可以和浮动元素在一个水平线上;
+           b)行框盒子和浮动元素的不可重叠性，即行框盒子如果和浮动元素的垂直高度有重叠，则行框盒子在正常定位状态下只会跟随浮动元素，
+           而不会发生重叠;
+
+        4、
+    -->
+
+    <style>
+        .father {
+            width: 200px;
+        }
+
+        .float > img {
+            float: left;
+        }
+
+        .img {
+            width: 150px;
+            opacity:0.1;
+            filter:alpha(opacity=10); /* 针对 IE8 以及更早的版本 */
+        }
+
+        .text{
+            margin-left: -100px;
+        }
+        .text:first-line {
+            background: red;
+            color: white;
+        }
+    </style>
+
+    <style>
+        .father2 {
+            width: 400px;
+            height: 200px;
+            background: #cccccc;
+        }
+
+        .float2 {
+            float: left;
+        }
+
+        .float2 > img {
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+<div class="father">
+    <div class="float">
+        <img class="img" src="../images/012.jpg">
+    </div>
+    <p class="text">而被大肆使用满屏布局。显然，布局的时候是不需要父元素塌陷的。于是，高度塌陷这种特性
+        反而成为了 float 属性一个不得不重视的坑</p>
+</div>
+<hr>
+
+<div class="father2">
+    <div class="float2">
+        <img src="../images/012.jpg">
+    </div>
+    我是帅哥，好巧啊，我也是帅哥，原来看这本书的人都是帅哥~
+</div>
+<div>内联状态下的图片底部是有间隙的，也就是.float2 这个浮动元素的实际高度并不是200px，而是要比 200px 高几像素，
+    带来的问题就是浮动元素的高度超出.father2 几像素。 尽管就那么几像素,下面的文字和浮动元素在垂直位置还是有了重叠，于是，
+    区域被限制，形成了图片“被环绕”效果(即"内联状态下。。。"这几个字本应左对齐的，结果跑到图片右侧去了)。因此，当使用浮动元素的时候，
+    比较稳妥的做法还是采用一些手段干净地清除浮动带来的影响，以避免很多意料之外的样式问题的发生。</div>
+</body>
+</html>

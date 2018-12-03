@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS028</title>
+    <link rel="stylesheet" href="../lib/css/font-awesome.min.css">
+    <!--
+        1、div里放置一张图片，div自身不设置高度，完全由图片撑开，此时发现如果不做任何处理，div的高度总是比图片高一点点，
+           也就是说图片底部留有间隙。
+           原因：“幽灵空白节点”、line-height 和 vertical-align 综合作用。
+           比如当前 line-height 计算值是 20px，而 font-size 只有 14px，因此，“幽灵空白节点”往下一定有至少 3px 的半行间距
+           (具体大小与字体有关)，而图片作为替换元素其基线是自身的下边缘。 根据定义，默认和基线(也就是“幽灵空白节点”的下边缘)
+           对齐，“幽灵空白节点”往下的行高产生的多余的间隙就嫁祸到图片下面，让人以为是图片产生的间隙，实际上，是“幽灵空白节点”、
+            line-height 和 vertical-align 属性共同作用的结果。
+            解决：知道了原因，那么就好解决了
+            (1)图片块状化，一口气干掉"幽灵空白节点"
+            (2)容器 line-height 足够小，比font-size还小，这样半行距就小于等于0，就不会在文本下边缘产生多余空隙。
+               一般直接设置 line-height:0
+            (3)容器 font-size 足够小。此方法要想生效，需要容器的 line-height 属性值和当前 font-size 相关，如 line-height:1.5
+               或者 line-height:150%之类。
+               一般直接设置 font-size:0
+            (4)图片设置其他 vertical-align 属性值。间隙的产生原因之一就是基线对齐，所以我们设置 vertical-align 的值为 top、middle、
+               bottom 中的任意一个都是可以的。
+    -->
+
+    <style>
+        .box {
+            width: 300px;
+            background: #cccccc;
+        }
+
+        .box > img {
+            height: 100px;
+        }
+
+        .box2 {
+            width: 300px;
+            background: #cccccc;
+        }
+
+        .box2 > img {
+            display: block;
+            height: 100px;
+        }
+
+        .box3 {
+            width: 300px;
+            line-height: 0;
+            background: #cccccc;
+        }
+
+        .box3 > img {
+            height: 100px;
+        }
+
+        .box4 {
+            width: 300px;
+            font-size: 0;
+            background: #cccccc;
+        }
+
+        .box4 > img {
+            height: 100px;
+        }
+
+        .box5 {
+            width: 300px;
+            background: #cccccc;
+        }
+
+        .box5 > img {
+            height: 100px;
+            vertical-align: bottom;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <h4>间隙示意(以下所有字符 x 都是扮演"幽灵空白节点")：</h4>
+    <div class="box">
+        x<img src="../images/009.jpg">
+    </div>
+
+    <h4>图片block块状清除间隙：</h4>
+    <div class="box2">
+        <img src="../images/009.jpg">
+    </div>
+
+    <h4>容器line-height:0清除间隙：</h4>
+    <div class="box3">
+        x<img src="../images/009.jpg">
+    </div>
+
+    <h4>容器font-size:0清除间隙：</h4>
+    <div class="box4">
+        x<img src="../images/009.jpg">
+    </div>
+
+    <h4>图片vertial-align设置清除：</h4>
+    <div class="box5">
+        x<img src="../images/009.jpg">
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>CSS041</title>
+    <link rel="stylesheet" href="../lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../lib/css/font-awesome.min.css">
+    <!--
+        1、当 absolute 遇到 left/top/right/bottom 属性的时候，absolute 元素才真正变成 绝对定位元素。如果一个都没有，
+           则是"无依赖绝对定位"，其本质是不占据父容器任何空间的相对定位；如果只设置了 left 则表示水平方向上绝对定位，但
+           垂直方向上仍然保持了相对特性；如果只设置了top，则表示在垂直方向上绝对定位，在水平方向上仍然保持了相对特性。
+        2、当 absolute 元素"对立方向同时发生定位"的时候(比如:left:0;right:0),则“格式化宽度”，元素宽度大小自适应于
+           .box包含块的padding box，如果包含块padding box宽度发生变 化，.box 的宽度也会跟着一起变，此时表现出流体特性。
+        3、下面这两种样式一般情况下表现一样，但是我们要尽量使用前者，因为前者会表现出流体特性，不管添加padding 或 margin
+           元素本身占据的尺寸不变，变化的只是 context-box， 后者会改变自身的尺寸。如果我们要元素的宽高自适应包含快就应该
+           使用流体特性的写法。
+            .box {
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: 0;
+                bottom: 0;
+            }
+
+            .box {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+            }
+        4、当 absolute 元素处于流体状态的时候，各个盒模型相关属性的解析和普通流体元素都是一模一样的，margin 负值可以让
+           元素的尺寸更大，并且可以使用 margin:auto 让绝对定位元素保持居中。
+           绝对定位元素的 margin:auto 的填充规则和普通流体元素的一模一样:
+            • 如果一侧定值，一侧 auto，auto 为剩余空间大小;
+            • 如果两侧均是 auto，则平分剩余空间;
+        5、
+    -->
+
+    <style>
+        .box {
+            width: 500px;
+            height: 200px;
+            background: #cccccc;
+        }
+
+        .box > .img1 {
+            position: absolute;
+            left: 250px;
+            height: 300px;
+        }
+
+        .box > .img2 {
+            position: absolute;
+            clip: rect(20px 200px 200px 20px);
+            height: 300px;
+        }
+    </style>
+
+    <style>
+        .box1 {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            padding: 30px;
+            background: #cccccc;
+        }
+
+        .box2 {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            padding: 30px;
+            background: #f0ad4e;
+        }
+
+        .box3 {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: 30px;
+            background: #8a6d3b;
+        }
+
+        .box4 {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            margin: 30px;
+            background: #3c763d;
+        }
+    </style>
+
+    <style>
+        /*--绝对定位元素水平垂直居写法1(不够简练)*/
+        .center1 {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 300px;
+            height: 200px;
+            margin-left: -150px; /* 宽度的一半 */
+            margin-top: -100px; /* 高度的一半 */
+            background: #ff0000;
+        }
+
+        /*--绝对定位元素水平垂直居写法2(百分比 transform 会让 iOS 微信闪退)*/
+        .center2 {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 300px;
+            height: 200px;
+            transform: translate(-50%, -50%); /* 50%为自身尺寸的一半 */
+            background: #00ff00;
+        }
+
+        /*--绝对定位元素水平垂直居写法3(利用流体特性及margin:auto，强烈推荐！)*/
+        .center3 {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 300px;
+            height: 200px;
+            margin: auto;
+            background: #0000ff;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <img class="img1" src="../images/027.jpg">
+    <img class="img2" src="../images/027.jpg">
+</div>
+<hr>
+
+
+<!--<div class="box1">Hello world</div>-->
+<!--<div class="box2">Hello world</div>-->
+<!--<div class="box3">Hello world</div>-->
+<!--<div class="box4">Hello world</div>-->
+<hr>
+
+
+<!--<div class="center1"></div>-->
+<!--<div class="center2"></div>-->
+<div class="center3"></div>
+</body>
+</html>

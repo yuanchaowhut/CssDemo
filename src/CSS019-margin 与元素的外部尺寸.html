@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS019</title>
+    <!--
+        1、对于普通块状元素，在默认的水平流下，margin 只能改变左右方向的内部尺寸，垂直方向则无法改变。
+        如果我们使用 writing-mode 改变流向为垂直流，则水平方向内部尺寸无法 改变，垂直方向可以改变。
+        2、和 padding 属性一样，margin 的百分比值无论是水平方向还是垂直方向都是相对于宽度计算的。
+    -->
+
+    <style>
+        .column-box {
+            overflow: hidden;
+        }
+
+        .column-left,
+        .column-right {
+            float: left;
+            margin-bottom: -9999px;
+            padding-bottom: 9999px;
+        }
+
+        .column-left {
+            background-color: #34538b;
+        }
+
+        .column-right {
+            background-color: #cd0000;
+        }
+
+    </style>
+
+    <script type="text/javascript">
+        window.onload = function () {
+            var $ = function (id) {
+                return document.getElementById(id);
+            };
+            // 分栏元素
+            var colLeft = $('colLeft'), colRight = $('colRight');
+            // 按钮元素
+            var leftMore = $('leftMore'), rightMore = $('rightMore');
+
+            // 序号
+            var indexLeft = 1, indexRight = 0;
+
+            if (colLeft && colRight && leftMore && rightMore) {
+                leftMore.onclick = function () {
+                    indexLeft = indexLeft + 1;
+                    colLeft.insertAdjacentHTML('beforeend', '<p>观点' + indexLeft + '</p>');
+                };
+                rightMore.onclick = function () {
+                    indexRight = indexRight + 1;
+                    colRight.insertAdjacentHTML('beforeend', '<p>观点' + indexRight + '</p>');
+                };
+            }
+        }
+    </script>
+</head>
+<body>
+<div class="column-box">
+    <div id="colLeft" class="column-left">
+        <h4>正方观点</h4>
+        <p>观点1</p>
+    </div>
+    <div id="colRight" class="column-right">
+        <h4>反方观点</h4>
+        <p>观点1</p>
+    </div>
+</div>
+<input type="button" id="leftMore" value="更多正方观点">
+<input type="button" id="rightMore" value="更多反方观点">
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS004</title>
+    <!--
+    区别:1.绝对定位的宽高百分比相对于padding box，会把padding大小值计算在内;
+        2.非绝对定位元素则是相对于content box;
+    -->
+    <style>
+        .container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            padding: 50px;
+            box-sizing: border-box;
+            background: #cccccc;
+        }
+
+        .box1 {
+            width: 100%;
+            height: 100%;
+            background: #00ff00;
+        }
+
+        .box2 {
+            position: absolute;
+            left:400px;;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: #ff00ff;
+        }
+
+    </style>
+
+</head>
+<body>
+<div class="container">
+    <div class="box1">非绝对定位(宽:100%,高:100%)以content box为基准</div>
+    <div class="box2">绝对定位(宽:100%,高:100%)以padding box为基准</div>
+</div>
+</body>
+</html>

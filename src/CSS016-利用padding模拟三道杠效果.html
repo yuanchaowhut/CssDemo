@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS016</title>
+    <!--
+        div的高度只有10px，但是padding-top,padding-bottom却有35px，故会撑到外面去。
+        "三道杠"分别由：border-top 10px, height 10px, border-bottom 10px 组成。
+    -->
+    <style>
+        .icon-menu {
+            display: inline-block;
+            width: 140px;
+            height: 10px;
+            padding: 35px 0;
+            border-top: 10px solid;
+            border-bottom: 10px solid;
+            background-color: currentColor;
+            background-clip: content-box;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <div class="icon-menu"></div>
+</div>
+</body>
+</html>

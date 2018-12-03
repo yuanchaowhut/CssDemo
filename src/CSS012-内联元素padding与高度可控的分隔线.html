@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS011</title>
+    <!--
+
+
+    -->
+    <style>
+        /* 表示所有紧跟着a标签之后的a:before元素。
+           那么第一个a的a:before显然没有紧跟着a之后，它在之前，所以它不被选择器选中
+        */
+        a + a:before {
+            content: "";
+            font-size: 0;
+            padding: 10px 3px 1px;
+            margin-left: 6px;
+            border-left: 1px solid gray;
+        }
+    </style>
+
+    <script type="text/javascript"></script>
+</head>
+<body>
+<div class="box">
+    <a href="">登录</a><a href="">注册</a>
+</div>
+</body>
+</html>

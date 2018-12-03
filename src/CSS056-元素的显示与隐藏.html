@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>CSS056</title>
+    <!--
+        1、元素隐藏的常见方法
+        (1)<script>标签隐藏：元素不可见，同时不占据空间，辅助设备无法访问，同时不渲染；
+           <script type="text/html">
+                <img src="../images/030.jpg">
+           </script>
+        (2)display:none 隐藏：元素不可见，同时不占据空间，辅助设备无法访问，但资源有加载，DOM 可访问；
+            .div {
+               display: none;
+            }
+        (3)元素不可见，同时不占据空间，辅助设备无法访问，但显隐的时候可以有transition 淡入淡出效果
+            .hidden {
+                position: absolute;
+                visibility: hidden;
+            }
+        (4)元素不可见，不能点击，辅助设备无法访问，但占据空间保留
+            .vh {
+                visibility: hidden;
+            }
+        (5)元素不可见，不能点击，不占据空间，但键盘可访问，则可以使用 clip 剪裁隐藏
+            .clip {
+                position: absolute;
+                clip: rect(0 0 0 0);
+            }
+            .out {
+                position: relative;
+                left: -999em;
+            }
+        (6)元素不可见，不能点击，但占据空间，且键盘可访问，则可以试试 relative 隐藏
+            .lower {
+                position: relative;
+                z-index: -1;
+            }
+        (7)元素不可见，但可以点击，而且不占据空间，则可以使用透明度
+            .opacity {
+                  position: absolute;
+                  opacity: 0;
+                  filter: Alpha(opacity=0);
+            }
+        (8)单纯希望元素看不见，但位置保留，依然可以点可以选，则直接让透明度为 0
+           .opacity {
+              opacity: 0;
+              filter: Alpha(opacity=0);
+            }
+
+
+       2、CSS3 transition支持的CSS属性中有visibility，但是并没 有 display
+    -->
+
+    <style>
+        .box, .box2 {
+            width: 400px;
+            height: 300px;
+            margin: 10px auto;
+            background: #cccccc;
+        }
+
+        .box > .target {
+            display: none;
+            position: absolute;
+            opacity: 0;
+            transition: opacity 1.5s;
+        }
+
+        .box:hover > .target {
+            display: block;
+            opacity: 1;
+        }
+
+        .box2 > .target {
+            position: absolute;
+            opacity: 0;
+            transition: opacity 1.5s;
+            visibility: hidden;
+        }
+
+        .box2:hover > .target {
+            visibility: visible;
+            opacity: 1;
+        }
+
+    </style>
+
+
+    <style>
+        table{
+            border-collapse: collapse;
+            margin: 10px auto;
+        }
+        td{
+            width: 100px;
+            height: 50px;
+            border: 1px solid #0094ff;
+            text-align: center;
+        }
+        td a {
+            display: block;
+        }
+
+        .list {
+            width: 80px;
+            position: absolute;
+            visibility: hidden;
+            border: 1px solid #ccc;
+            background: #fff;
+        }
+
+        td:hover .list {
+            visibility: visible;
+            transition: visibility 0s .2s;
+        }
+
+        .list a {
+            padding: 5px 10px;
+            color: #333;
+        }
+
+        .list a:hover {
+            background-color: #f5f5f5;
+        }
+    </style>
+</head>
+
+<body>
+<div class="box">
+    <img class="target" src="../images/030.jpg" width="200">
+</div>
+
+<div class="box2">
+    <img class="target" src="../images/030.jpg" width="200">
+</div>
+
+
+<h3>从第一行滑过定位到第2行时，如果使用的是display:none则会显示第一行的hover结果，但是我们实际需要的是显示第2行，如果使用visibility:hidden,则可以通过transition的延时效果有效的避免这一问题</h3>
+<table>
+    <tr>
+        <td>栏目1</td>
+        <td>栏目2</td>
+        <td>
+            <a href>操作▾</a>
+            <div class="list">
+                <a href>编辑</a>
+                <a href>删除</a>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>栏目1</td>
+        <td>栏目2</td>
+        <td>
+            <a href>操作▾</a>
+            <div class="list">
+                <a href>编辑</a>
+                <a href>删除</a>
+            </div>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
+

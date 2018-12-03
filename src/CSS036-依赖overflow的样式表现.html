@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>CSS036</title>
+    <!--
+        1、单行显示实例；
+        2、锚点实例一二；
+        3、锚点返回顶部实例；
+        4、锚点定位行为的触发条件：(1)URL 地址中的锚链与锚点元素对应并有交互行为；(2)可 focus 的锚点元素处于 focus 状态。
+        5、“focus 锚点定位”指的是类似链接或者按钮、输入框等可以被 focus 的元素在被 focus 时发生的页面重定位现象。
+           “focus 锚点定位”不依赖于 JavaScript，是浏览器内置的无障碍访问行为，并且所有浏览器都是如此。
+           “URL 地址锚链定位”是让元素定位在浏览器窗体的上边缘，而“focus 锚点定位”是让元素在浏览器窗体范围内显示即可，不一定是在上边缘。
+        6、overflow:hidden 也是可以滚动的，overflow:hidden 跟 overflow:auto 和 overflow:scroll 的差别就在于有没有那个滚动条。
+           元素设置了 overflow:hidden 声明，里面内容高度溢出的时候，滚动依然存在，仅仅滚动条不存在!但是此时不能通过滚动鼠标来滚动页面，
+           可以通过锚点进行滚动。
+        7、锚点定位本质上是改变了 scrollTop 或 scrollLeft 值。document.querySelector('.box').scrollTop = 200;
+    -->
+
+    <style>
+        /*单行显示，超过1行末尾显示点点*/
+        .ell {
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        /*多行显示，超过指定行 行末尾显示点点(容易出bug)*/
+        .ell-rows-2 {
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3;
+        }
+    </style>
+
+    <style>
+        .img {
+            display: block;
+        }
+    </style>
+
+    <style>
+        .page {
+            width: 20em;
+            height: 10em;
+            border: 1px solid #ddd;
+            overflow: hidden;
+        }
+        .list {
+            line-height: 10em;
+            background: #ddd;
+            text-align: center;
+        }
+        .link{
+            display: flex;
+            width: 20em;
+        }
+        .click{
+            flex: 1;
+            text-align: center;
+            text-decoration: none;
+        }
+        .click:hover{
+            background: #cccccc;
+        }
+    </style>
+
+    <script>
+        window.onload = function () {
+            document.querySelector('#focus').onclick = function () {
+                anchor();
+            }
+        }
+
+        function anchor() {
+            document.querySelector('.text').focus();
+        }
+    </script>
+</head>
+<body>
+<div class="box">
+    <p class="ell">在 CSS 世界中，很多属性要想生效都必须要有其他 CSS 属性配合，其中有一种效果就离不开 overflow:hidden 声明，
+        即单行文字溢出点点点效果</p>
+    <hr>
+
+    <p class="ell-rows-2">在 CSS 世界中，很多属性要想生效都必须要有其他 CSS 属性配合，其中有一种效果就离不开 overflow:hidden 声明，
+        即单行文字溢出点点点效果</p>
+</div>
+<hr>
+
+<div class="box">
+    <a href="#1">锚点实例一</a>
+    <a href="#2">锚点实例二</a>
+    <button id="focus" type="button">focus锚点定位实例</button>
+    <img class="img" src="../images/019.jpg" height="300">
+    <img class="img" src="../images/019.jpg" height="300">
+    <img class="img" src="../images/019.jpg" height="300">
+    <img class="img" src="../images/019.jpg" height="300">
+    <a name="1">锚点实例一(接住)</a>
+    <img class="img" src="../images/019.jpg" height="300">
+    <img class="img" src="../images/019.jpg" height="300">
+    <img class="img" src="../images/019.jpg" height="300">
+    <img class="img" src="../images/019.jpg" height="300">
+    <h3 id="2">锚点实例二(接住)</h3>
+    <img class="img" src="../images/019.jpg" height="300">
+    <img class="img" src="../images/019.jpg" height="300">
+    <img class="img" src="../images/019.jpg" height="300">
+    <img class="img" src="../images/019.jpg" height="300">
+    <a href="#">返回顶部></a>
+</div>
+<hr>
+
+<div class="box">
+    <input class="text" type="text" placeholder="演示focus定位">
+</div>
+<hr>
+
+<div>
+    <div class="page">
+        <div class="list" id="one">1</div>
+        <div class="list" id="two">2</div>
+        <div class="list" id="three">3</div>
+        <div class="list" id="four">4</div>
+    </div>
+    <div class="link">
+        <a class="click" href="#one">1</a>
+        <a class="click" href="#two">2</a>
+        <a class="click" href="#three">3</a>
+        <a class="click" href="#four">4</a>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS011</title>
+    <!--
+        在实际项目中，content属性几乎都是用在::before/::after这两个伪元素中， 因此，“content 内容生成技术”有时候
+        也称为“::before/::after 伪元素技术”。
+
+        1、content 辅助元素生成。
+        此应用的核心点不在于 content 生成的内容，而是伪元素本身。通常，我们会把 content 的属性值设置为空字符串。
+        2、content 字符内容生成。
+        content 字符内容生成就是直接写入字符内容，中英文都可以，比较常见的应用就是配合 @font-face 规则实现图标字体效果。
+        3、content 图片生成。
+        content 图片生成指的是直接用 url 功能符显示图片，例如：
+        div:before {
+            content: url(1.jpg);
+        }
+        虽然支持的图片格式多种多样，但是实际项目中，content 图片生成用得并不多，主要原因在于图片的尺寸不好控制，
+        我们设置宽高无法改变图片的固有尺寸。所以，伪元素中的图片更多的是使用 background-image 模拟，类似这样:
+        div:before {
+            content: '';
+            background: url(1.jpg);
+        }
+        4、了解 content 开启闭合符号生成（看书）
+        5、content attr属性值内容生成
+        img::after {
+            /* 生成alt信息 */
+            content: attr(alt); /* 其他CSS略 */
+        }
+        6、深入理解 content 计数器（看书）
+
+    -->
+    <style>
+        /*应用1：清除浮动*/
+        .clear:after {
+            content: '';
+            display: table; /* 也可以是'block' */ clear: both;
+        }
+
+        dot {
+            display: inline-block;
+            height: 1em;
+            line-height: 1;
+            text-align: left;
+            vertical-align: -.25em;
+            overflow: hidden;
+        }
+        dot::before {
+            display: block;
+            content: '...\A..\A.'; /*\A表换行*/
+            white-space: pre-wrap;
+            animation: dot 1s infinite step-start both;
+        }
+        @keyframes dot {
+            33% { transform: translateY(-2em); }
+            66% { transform: translateY(-1em); }
+        }
+    </style>
+
+</head>
+<body>
+<div class="box">
+    正在加载中<dot>...</dot>
+</div>
+</body>
+</html>

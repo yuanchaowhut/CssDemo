@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>CSS033</title>
+    <!--
+        1、浮动锚点：浮动锚点是 float 元素所在的“流”中的一个点，这个点本身并不浮动，就表现而言更像一个没有 margin、border
+           和 padding 的空的内联元素。其作用就是产生“行框盒子”，这样 float 元素对齐的参考实体“行框盒子”对于块状元素也同样适用了。
+           浮动参考：浮动参考指的是浮动元素对齐参考的实体（行框盒子）。
+
+        2、利用 float 属性做 两栏布局(一侧定宽一侧自适应)、三栏布局(两侧定宽中间自适应)
+
+        3、官方对 clear 属性的解释是: 元素盒子的边不能和前面的浮动元素相邻(或者说在一行显示)(注意"前面的"这个定语)。
+           意思是设置了 clear 属性的元素自身如何如何，而不是让 float 元素如何如何。float 元素该浮动还是浮动。
+            • none:默认值，左右浮动来就来。
+            • left:左侧抗浮动。
+            • right:右侧抗浮动。
+            • both:两侧抗浮动。
+           考虑到 float 属性要么就 left 要么就 right，不可能同时存在，所以需要清除浮动的时候推荐直接使用 clear:both。
+        4、clear 属性只有块级元素才有效的，而::after 等伪元素默认都是内联水平，这就是借助伪元素清除浮动影响时需要设置
+           display 属性值的原因。
+            .clear:after {
+            content: '';
+            display: table; // 也可以是'block'，或者是'list-item' clear: both;
+            }
+        5、清除浮动clear
+           (1)如果 clear:both 元素前面的元素就是 float 元素，则 margin-top 负值即使设成-9999px，也不见任何效果。
+           (2)clear:both 后面的元素依旧可能会发生文字环绕的现象。
+    -->
+
+    <style>
+        .father {
+            overflow: hidden;
+        }
+
+        .father > img {
+            width: 100px;
+            float: left;
+        }
+
+        .animal {
+            margin-left: 110px;
+            background: #cccccc;
+        }
+    </style>
+
+    <style>
+        .prev {
+            float: left;
+        }
+
+        .next {
+            float: right;
+        }
+
+        .title {
+            margin: 0 70px;
+            text-align: center;
+        }
+    </style>
+
+    <style>
+        li {
+            float: left;
+            width: 30px;
+            height: 30px;
+            margin: 5px;
+            list-style-type: none;
+            background: #000;
+        }
+
+        /*这里虽然使用的是 clear:both，但是实际并不是像我们想的产生3行而是2行。
+         *这是因为"元素盒子的边不能和前面的浮动元素相邻"，clear 只针对前面浮动的元素，对后面浮动的元素无效！
+        */
+        li:nth-of-type(3) {
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+<div class="father">
+    <img src="../images/013.jpg">
+    <div class="animal">
+        两栏布局。和文字环绕效果相比，区别就在于.animal 多了一个 margin-left:70px，也就是所有小动 物都要跟男主保持至少 70px 的距离，
+        由于图片宽度就 60px，因此不会发生环绕，自适应效果达成。
+    </div>
+</div>
+<hr>
+
+<div class="box">
+    <a href class="prev">&laquo; 上一章</a>
+    <a href class="next">下一章 &raquo;</a>
+    <h3 class="title">三栏布局</h3>
+</div>
+<hr>
+
+<div class="box">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</div>
+</body>
+</html>

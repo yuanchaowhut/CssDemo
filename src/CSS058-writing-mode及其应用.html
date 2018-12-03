@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>CSS058</title>
+    <!--
+        1、writing-mode 将页面默认的水平流改成了垂直流，颠覆了我们以往的很多认知，基于原本水平方向才适用的规则全部都可以在垂直方向适用!
+           (1)水平方向也能 margin 合并
+           (2)普通块元素可以使用 margin:auto 实现垂直居中
+           (3)可以使用 text-align:center 实现图片垂直居中
+           (4)可以使用 text-indent 实现文字下沉效果
+    -->
+
+    <style>
+        .btn {
+            display: inline-block;
+            color: #a78252;
+            background-color: #ddc390;
+            width: 85px;
+            height: 85px;
+            line-height: 85px;
+            border: 6px solid #ddc390;
+            border-radius: 50%;
+            box-shadow: inset 0 0 0 1px #d6b681, 0 1px, 0 2px, 0 3px, 0 4px;
+            text-align: center;
+            text-decoration: none;
+            -webkit-transition: border-color .25s, background-color .25s;
+            transition: border-color .25s, background-color .25s;
+            font-size: 42px;
+            cursor: pointer;
+        }
+
+        .btn:active {
+            text-indent: 2px;
+        }
+
+        .verticle-mode {
+            writing-mode: tb-rl;
+            -webkit-writing-mode: vertical-rl;
+            writing-mode: vertical-rl;
+        }
+    </style>
+</head>
+
+<body>
+<p>恭喜你中了88元红包！</p>
+<a href="javascript:" class="btn verticle-mode">领</a></body>
+</html>
+

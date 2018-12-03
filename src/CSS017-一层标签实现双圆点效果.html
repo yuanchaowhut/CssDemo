@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS017</title>
+    <!--
+        background-clip：
+        border-box：默认值。背景绘制在border-box内；
+        padding-box：背景绘制在padding-box内；
+        content-box：背景绘制在content-box内；
+    -->
+    <style>
+        .icon-dot {
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+            padding: 10px;
+            border: 10px solid #000000;
+            border-radius: 50%;
+            background-color: #000000;
+            background-clip: content-box;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <div class="icon-dot"></div>
+</div>
+</body>
+</html>

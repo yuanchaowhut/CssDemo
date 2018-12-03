@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS008</title>
+    <!--
+        以鸡蛋形象比喻，由内到外，蛋清蛋黄作为内容，是固有尺寸；外面一层薄薄的膜是HTML尺寸；蛋壳是CSS尺寸。
+        1、如果没有 CSS 尺寸和 HTML 尺寸，则使用固有尺寸作为最终的宽高；
+        2、如果没有 CSS 尺寸，则使用 HTML 尺寸作为最终的宽高；
+        3、如果有 CSS 尺寸，则最终尺寸由 CSS 属性决定；
+        4、固有尺寸含有固有的宽高比例，如果仅设置宽度或仅设置了高度，则元素依然按照固有的宽高比例显示
+        5、如果上面的条件都不符合，则最终宽度表现为300像素，高度为150像素，宽高比2:1(<video>、<canvas>和<iframe>，但img元素例外)；
+        6、内联替换元素和块级替换元素使用上面同一套尺寸计算规则，这也是为什么img设置display:block没有充满整个div的原因.
+    -->
+    <style>
+        img {
+            display: block;
+            width: 100px;
+            height: 80px;
+        }
+    </style>
+
+</head>
+<body>
+<div class="box">
+    <img src="../icons/replace.png" width="200" height="150">
+</div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS006</title>
+    <!--
+    超越!important 指的是 max-width 会覆盖 width，而且这种覆盖不是普通的覆盖，是超级覆盖，覆盖到什么程度呢?
+    大家应该都知道 CSS 世界中的!important 的权重相当高，在业界，往 往会把!important 的权重比成“泰坦尼克”，
+    比直接在元素的 style 属性中设置 CSS 声明还要高， 一般用在 CSS 覆盖 JavaScript 设置上。但是，就是这么厉害的
+    !important，直接被 max-width 一 个浪头就拍沉了。
+
+    超越最大指的是 min-width 覆盖 max-width，此规则发生在 min-width 和 max-width冲突的时候。
+
+    下面的img1的最终宽度为max-width设置的256px；  img2的宽度为min-width设置的400px.
+    -->
+    <style>
+        #img1 {
+            max-width: 256px;
+        }
+
+        #img2 {
+            margin-left: 50px;
+            min-width: 400px;
+            max-width: 256px;
+        }
+    </style>
+
+</head>
+<body>
+<div class="box">
+    <img id="img1" src="../images/002.jpg" style="width:480px!important">
+
+    <img id="img2" src="../images/002.jpg">
+</div>
+</body>
+</html>

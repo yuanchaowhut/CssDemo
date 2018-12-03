@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS010</title>
+    <!--
+        1、替换元素与非替换元素之间隔了个src属性；
+        2、替换元素与非替换元素之间隔了个content属性;
+
+
+        1、没有src属性的img元素就相当于一个内联元素(如span);
+        2、使用 content 属性，我们还可以让普通标签元素变成替换元素(如h1元素显示图片logo);
+        3、我们把 content 属性生成的对象称为“匿名替换元素”(anonymous replaced element)
+        4、我们使用 content 生成的文本是无法选中、无法复制的，好像设置了 user- select:none 声明一般，也无法被搜索引擎抓取，
+           因此content 属性只能用来生成一些无关紧要的内容，如装饰性图形或者序号之类;
+        5、不要担心原本重要的文字信息会被 content 替换，替换的仅仅是视觉层；
+        6、不能左右:empty 伪类。:empty 是一个 CSS 选择器，当元素里面无内容的时候进行匹配；
+        7、content 动态生成值无法获取；
+    -->
+    <style>
+        #img1 {
+            display: inline-block;
+            width: 25%;
+            content: url("../images/004.jpg");
+        }
+
+        #img2 {
+            display: inline-block;
+            width: 25%;
+        }
+
+        #img2:hover {
+            content: url("../images/006.jpg");
+        }
+
+        #logo1 {
+            width: 180px;
+            height: 36px;
+            background: url(../images/005.jpg);
+            text-indent: -999px; /* 隐藏文字 */
+        }
+
+        #logo2 {
+            width: 180px;
+            height: 36px;
+            content: url("../images/005.jpg");
+        }
+
+        .div {
+            margin-top: 10px;
+            padding: 10px;
+            border: 2px solid #cd0000;
+        }
+
+        .div:empty {
+            border-style: dashed;
+        }
+
+        .div::after {
+            content: "伪元素生成内容"; /*这里看似给div生成了文字，但是第2个div还是被认为是empty*/
+        }
+    </style>
+
+</head>
+<body>
+<div class="box">
+    <img id="img1">
+    <img id="img2" src="../images/004.jpg">
+
+    <!--非替换元素方式-->
+    <h1 id="logo1"></h1>
+    <!--替换元素方式-->
+    <h1 id="logo2"></h1>
+
+    <div class="div">有内容</div>
+    <div class="div"></div>
+</div>
+</body>
+</html>

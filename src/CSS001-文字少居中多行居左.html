@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS001</title>
+    <!--
+    需求:页面某个模块的文字内容是动态的，可能是几个字，也可能是一句话。我们希望文字少的时候居中显示，文字超过一行的时候居左显示。
+    要点:使用inline-block的包裹性。
+    -->
+    <style>
+        .box {
+            width: 200px;
+            height: 100px;
+            margin: 0 auto;
+            text-align: center;
+            background: #ff0000;
+        }
+
+        .content {
+            display: inline-block;
+            text-align: left;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="box">
+        <span class="content">文字内容文字内容文字内容文字内容文字内容文字内容文字内容文字内容</span>
+    </div>
+</body>
+</html>

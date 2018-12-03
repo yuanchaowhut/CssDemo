@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>CSS042</title>
+    <link rel="stylesheet" href="../lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../lib/css/font-awesome.min.css">
+    <!--
+        1、relative 的定位有两大特性:一是相对自身;二是无侵入。
+           "相对自身"是指相对自身的起始位置进行偏移。
+            注意：
+            1)如果 left/top/right/bottom 为百分比值，则其基准是包含块计算的宽高，而不是元素自身。
+            2)如果包含块的高度是 auto，那么计算值是 0，偏移无效。
+            3)当相对定位元素同时应用对立方向定位值的时候，也就是 top/bottom 和 left/right 同时使用的时候，其表现为“你死我活”，
+              只有一个方向的定位属性会起作用，而孰强孰弱则是与文档流的顺序有关的，默认的文档流是自上而下、从左往右，因此 top/bottom
+              同时使 用的时候，bottom 被干掉;left/right 同时使用的时候，right 毙命。
+           “无侵入”是指当 relative 进行定位偏移的时候，一般情况下不会影响周围元素的布局。
+
+        2、relative 与 margin 技能有些相似，但是也有明显区别。relative 不会影响周围元素布局，margin 则会影响。
+
+        3、relative 的最小化影响原则
+           1)尽量不使用 relative，如果想定位某些元素，看看能否使用“无依赖的绝对定位”。
+           2)如果场景受限，一定要使用 relative，则该 relative 务必最小化。
+             理解"relative 务必最小化"，如果我们的需求时将图标定位到div的右上角，对比下面2段代码：
+              <div style="position:relative;">
+                  <img src="icon.png" style="position:absolute;top:0;right:0;">
+                  <p>内容 1</p>
+                  <p>内容 2</p>
+                  <p>内容 3</p>
+                  <p>内容 4</p>
+              </div>
+              <div>
+                  <div style="position:relative;">
+                      <img src="icon.png" style="position:absolute;top:0;right:0;">
+                  </div>
+                  <p>内容 1</p>
+                  <p>内容 2</p>
+                  <p>内容 3</p>
+                  <p>内容 4</p>
+              </div>
+             前者position:relative 影响范围比后者大，后者只影响图标，前者可以影响所有元素！
+             “relative 的最小化影响原则”的目的：
+             1、规避复杂场景可能出现样式问题的隐患；
+             2、便于后期维护，比如我们不需要右上角的图标了，直接移除这个 relative 最小化的单元即可!
+                但是，如果 relative 是容器上的，这段样式代码你敢删吗?
+        4、相比普通元素，相对定位元素的层叠顺序是“鬼畜”级别的。一旦元素设置了 position:relative， 则其层叠顺序立马上升，
+           所以一个元素想要通过margin负值来覆盖一个relative元素是不可能实现的。
+    -->
+
+    <style>
+        .box {
+            width: 500px;
+            height: 200px;
+            background: #cccccc;
+        }
+
+        .box > img {
+            position: relative;
+            top: -50px;
+            height: 150px;
+        }
+
+        .box1 {
+            width: 500px;
+            height: 200px;
+            background: #cccccc;
+        }
+
+        .box1 > img {
+            height: 150px;
+            margin-top: -50px;
+        }
+    </style>
+
+    <style>
+
+    </style>
+
+    <style>
+
+    </style>
+</head>
+<body>
+<div class="box">
+    <img src="../images/028.jpg">
+    <p>结果从视觉效果看，图片最终定位的位置是一样的，但是，图片后面的元素却表现出了明显的差异:margin 定位的图片后面的文字跟着上来了，
+        而使用 relative 定 位的图片后面的文字依然在原地纹丝不动，中间区域留出了一大块空白</p>
+</div>
+<hr>
+<br>
+<br>
+<br>
+
+<div class="box1">
+    <img src="../images/028.jpg">
+    <p>结果从视觉效果看，图片最终定位的位置是一样的，但是，图片后面的元素却表现出了明显的差异:margin 定位的图片后面的文字跟着上来了，
+        而使用 relative 定 位的图片后面的文字依然在原地纹丝不动，中间区域留出了一大块空白</p>
+</div>
+<hr>
+
+</body>
+</html>

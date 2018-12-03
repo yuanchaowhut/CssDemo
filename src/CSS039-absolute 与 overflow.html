@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>CSS039</title>
+    <link rel="stylesheet" href="../lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../lib/css/font-awesome.min.css">
+    <!--
+        1、如果 overflow 不是定位元素，同时绝对定位元素和 overflow 容器之间也没有定位元素，则 overflow 无法对 absolute 元素进行剪裁。
+           对上面的翻译：
+           overflow 不能对 absolute 元素进行剪裁要同时满足2个条件：
+           1)overflow容器不是定位元素;
+           2)absolute元素和overflow容器之间没有定位元素；
+        2、如果 overflow 的属性值不是 hidden 而是 auto 或者 scroll，即使绝对定位元素高宽比 overflow 元素高宽还要大，也都不会出现滚动条
+        3、由于 position:fixed 固定定位元素的包含块是根元素，因此，除非是窗体滚动，否则上面讨论的所有 overflow 剪裁规则
+           对固定定位都不适用。 这一点后面还会提及。
+    -->
+
+    <style>
+        .box {
+            width: 500px;
+            height: 200px;
+            background: #cccccc;
+            overflow: hidden;
+        }
+
+        .box > img {
+            position: absolute;
+            height: 300px;
+        }
+    </style>
+
+    <style>
+        .outer {
+            position: relative;
+        }
+
+        .inner {
+            width: 500px;
+            height: 200px;
+            background: #cccccc;
+            overflow: hidden;
+        }
+
+        .inner > img {
+            position: absolute;
+            height: 300px;
+        }
+    </style>
+
+    <style>
+        .box2 {
+            position: relative; /*overflow元素也是定位元素*/
+            width: 500px;
+            height: 200px;
+            background: #cccccc;
+            overflow: hidden;
+        }
+
+        .box2 > img {
+            position: absolute;
+            height: 300px;
+        }
+    </style>
+
+    <style>
+        .outer2 {
+            overflow: hidden; /*overflow元素和absolute元素之间有定位元素*/
+        }
+
+        .inner2 {
+            position: relative;
+            width: 500px;
+            height: 200px;
+            background: #cccccc;
+
+        }
+
+        .inner2 > img {
+            position: absolute;
+            height: 300px;
+        }
+    </style>
+
+
+    <style>
+        .outer3 {
+            position: relative;
+        }
+
+        .inner3 {
+            width: 300px;
+            height: 100px;
+            overflow: auto;
+            background: #cccccc;
+        }
+
+        .inner3 > img {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 200px;
+            opacity:0.6;
+            filter:alpha(opacity=60); /* 针对 IE8 以及更早的版本 */
+        }
+    </style>
+</head>
+<body>
+<!--absolute元素不能被裁减的情况1-->
+<div class="box">
+    <img src="../images/025.jpg">
+</div>
+<hr>
+
+<!--absolute元素不能被裁减的情况2-->
+<div class="outer">
+    <div class="inner">
+        <img src="../images/025.jpg">
+    </div>
+</div>
+<hr>
+
+<!--absolute元素能被裁减的情况1-->
+<div class="box2">
+    <img src="../images/025.jpg">
+</div>
+<hr>
+
+<!--absolute元素能被裁减的情况2-->
+<div class="outer2">
+    <div class="inner2">
+        <img src="../images/025.jpg">
+    </div>
+</div>
+<hr>
+
+<div class="outer3">
+    <div class="inner3">
+        <p>实际开发的时候，绝对定位元素和非绝对定位元素往往可能混杂在一起，虽然绝对定位元素不能让滚动条出现，
+            但是非绝对定位元素可以，于是，就可能出现另外一种很有特色的现象， 即当容器滚动的时候，绝对定位元
+            素微丝不动，不跟着滚动，表现类似 fixed 固定定位</p>
+        <img src="../images/026.jpg">
+    </div>
+</div>
+<hr>
+</body>
+</html>

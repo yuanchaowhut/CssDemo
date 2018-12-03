@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>CSS049</title>
+    <!--
+        1、indent 一个非常实用的场景(问题-答案)；
+        2、你可能不知道的 text-indent 的小知识：
+           (1)text-indent 仅对第一行内联盒子内容有效。
+           (2)非替换元素以外的 display 计算值为 inline 的内联元素设置 text-indent 值无效，如果计算值是 inline-block/inline-table
+              则会生效。因此，如果父级块状元素设置了 text-indent 属性值，子 inline-block/inline-table 需要设置 text-indent:0 重置。
+           (3)<input>标签按钮 text-indent 值无效。
+           (4)<button>标签按钮 text-indent 值有效，但是存在兼容性差异，IE 浏览器理解为单标签，百分比值按照容器计算，而 Chrome 和
+              Firefox 浏览器标签内还有其他 Shadow DOM 元素，因此百分比值是按照自身的尺寸计算的。
+           (5)<input>和<textarea>输入框的 text-indent 在低版本 IE 浏览器下有兼容问题。
+    -->
+
+    <style>
+        .box{
+            width: 250px;
+        }
+
+        p {
+            text-indent: -2.5em;
+            padding-left: 2.5em;
+        }
+    </style>
+</head>
+
+<body>
+<div class="box">
+    <p>提问:你是如何评价text-indent百分比值的?</p>
+    <p>回答:我其实一开始是对text-indent百分比值抱有很大期望的，希望可以有一些非常犀利的应用，但是后来发现，要么有缺陷，要么鸡肋。或许是自己掌握的还不够吧！</p>
+</div>
+</body>
+
+</html>
+

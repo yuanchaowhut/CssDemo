@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS020</title>
+    <!--
+        1、什么是 margin 合并？
+        块级元素的上外边距(margin-top)与下外边距(margin-bottom)有时会合并为单个外边距，这样的现象称为“margin 合并”。
+        如果我们使用 writing-mode 改变流向为垂直流，则水平方向内部尺寸无法 改变，垂直方向可以改变。
+        从此定义上，我们可以捕获两点重要的信息。
+        (1)块级元素，但不包括浮动和绝对定位元素，尽管浮动和绝对定位可以让元素块状化。
+        (2)只发生在垂直方向，需要注意的是，这种说法在不考虑 writing-mode 的情况下才是正确的，严格来讲，应该是只发生在和
+        当前文档流方向的相垂直的方向上。由于默认文档流 是水平流，因此发生 margin 合并的就是垂直方向。
+
+        2、margin 合并的 3 种场景（兄弟、父子、自身）
+        (1)相邻兄弟元素 margin 合并（最常见）
+        (2)父级和第一个/最后一个子元素
+           父子元素margin合并并不是"你出一点力，我出一点力"，而是父元素没有出一点力，子元素出了全部的力，然后最终的 margin
+           全部合到了父元素上。也就是虽然是在子元素上设置的 margin-top，但实际上就等同于在父元素上设置了 margin-top。
+        (3)空块级元素的 margin 合并
+
+        3、那该如何阻止这里 margin 合并的发生呢?
+        对于 margin-top 合并，可以进行如下操作(满足一个条件即可):
+        • 父元素设置为块状格式化上下文元素;
+        • 父元素设置 border-top 值;
+        • 父元素设置 padding-top 值;
+        • 父元素和第一个子元素之间添加内联元素进行分隔。
+        对于 margin-bottom 合并，可以进行如下操作(满足一个条件即可):
+        • 父元素设置为块状格式化上下文元素;
+        • 父元素设置 border-bottom 值;
+        • 父元素设置 padding-bottom 值;
+        • 父元素和最后一个子元素之间添加内联元素进行分隔;
+        • 父元素设置 height、min-height 或 max-height
+        如果有人不希望空<div>元素有 margin 合并，可以进行如下操作:
+        • 设置垂直方向的 border;
+        • 设置垂直方向的 padding;
+        • 里面添加内联元素(直接 Space 键空格是没用的);
+        • 设置 height 或者 min-height
+
+        4、margin 合并的计算规则
+        正正取大值，正负值相加，负负最负值
+
+
+    -->
+
+    <style>
+        p {
+            margin: 1em 0;
+        }
+
+        .parent {
+            overflow: hidden;
+            background: #cccccc;
+        }
+
+        .child {
+            margin: 100px 0;  /*parent并非200px，而是100px，因为margin-top和margin-bottom合并了*/
+        }
+    </style>
+
+</head>
+<body>
+<!--兄弟元素margin合并-->
+<div class="box">
+    <p>第一行</p>
+    <p>第二行</p>
+</div>
+
+<!--父子元素margin合并(在默认状态下，下面 3 种设置是等效的)-->
+<div class="box">
+    <div class="father">
+        <div class="son" style="margin-top:80px; background: #cccccc">子元素</div>
+    </div>
+    <div class="father" style="margin-top:80px; background: #34538b">
+        <div class="son">子元素</div>
+    </div>
+    <div class="father" style="margin-top:80px; background: magenta">
+        <div class="son" style="margin-top:80px;">子元素</div>
+    </div>
+</div>
+
+<br>
+<br>
+<br>
+<!--空块级元素的 margin 合并-->
+<div class="parent">
+    <div class="child"></div>
+</div>
+</body>
+</html>

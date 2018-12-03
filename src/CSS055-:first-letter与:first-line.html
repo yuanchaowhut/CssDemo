@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>CSS055</title>
+    <!--
+        1、::first-letter 伪元素生效的前提：
+           (1)元素的 display 计算值必须是 block、inline-block、list-item、table- cell 或者 table-caption.
+           (2)不是所有的字符都能单独作为::first-letter 伪元素存在的。可以直接作为伪元素的字符就是数字、英文字母、中文、$、一些运算符，
+              以及非常容易被忽视的空格等.
+        2、::first-letter 伪元素可以生效的 CSS 属性
+           所有字体相关属性
+           所有背景相关属性
+           所有 margin 相关属性
+           所有 padding 相关属性
+           所有 border 相关属性
+           color 属性
+           text-decoration、text-transform、letter-spacing、word-spacing(合 适情境下)、line-height、float 和
+           vertical-align(只有当 float 为 none 的时候)等属性。
+    -->
+
+    <style>
+        .price:first-letter {
+            margin-right: 5px;
+            font-size: xx-large;
+            vertical-align: -2px;
+        }
+    </style>
+
+
+</head>
+
+<body>
+<p class="price">¥399</p>
+</body>
+</html>
+

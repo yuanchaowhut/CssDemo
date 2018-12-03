@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS015</title>
+    <!--
+        按钮 padding 与高度计算不同浏览器下千差万别。﻿
+        button {
+            line-height: 20px;
+            padding: 10px;
+            border: none;
+        }
+        结果，在 Chrome 浏览器下是预期的 40 像素，然而 Firefox 浏览器下是莫名其妙的 42 像素，在 IE7 浏览器下更是匪夷所思的 45 像素，
+        这使我们平常制作网页的时候很少使用原生的 <button>按钮作为点击按钮，而是使用<a>标签来模拟。但是，在表单中，有时候按钮是自带交互
+        行为的，这是<a>标签无法模拟的。我这里给大家推荐一个既语义良好行为保留，同时 UI 效果棒兼容效果好的实现小技巧，那就是使用<label>元素。
+
+        <label>元素的 for 属性值和<button>元素的 id 值对应即可。此时，所有浏览器下的
+        按钮高度都是 40 像素，而且<button>元素的行为也都保留了，是非常不错的实践技巧。
+    -->
+    <style>
+        button {
+            position: absolute;
+            clip: rect(0 0 0 0);
+        }
+
+        label {
+            display: inline-block;
+            line-height: 20px;
+            padding: 10px;
+            background: #34538b;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <button id="btn"></button>
+    <label for="btn">按钮</label>
+</div>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS024</title>
+    <!--
+        1、左侧深色背景区域是由 border-left 属性生成的。元素边框高度总是和元素自身高度保持一致，因此可以巧妙地实现等高布局效果。
+        2、父级容器不能使用 overflow:hidden 清除浮动影 响，因为溢出隐藏是基于padding box的，如果设置了overflow:hidden，
+           则左浮动的导航 列表元素就会被隐藏掉。
+
+    -->
+
+    <style>
+        /* 导航背景区border创建 */
+        .box {
+            border-left: 150px solid #333;
+            background-color: #f0f3f9;
+        }
+
+        /* 清除浮动影响，不能使用overflow:hidden */
+        /*.box:after {*/
+            /*content: "";*/
+            /*display: block;*/
+            /*clear: both;*/
+        /*}*/
+
+        /* 布局主结构 */
+        .box > nav {
+            width: 150px;
+            margin-left: -150px;
+            float: left;
+        }
+
+        .box > section {
+            overflow: hidden;
+        }
+
+        /* 导航列表和模块列表 */
+        .nav {
+            line-height: 40px;
+            color: #fff;
+        }
+
+        .module {
+            line-height: 40px;
+        }
+    </style>
+
+    <script>
+        window.onload = function () {
+            var navMore = document.getElementById('navMore'),
+                moduleMore = document.getElementById('moduleMore');
+
+            if (navMore && moduleMore) {
+                var nav = document.querySelector('nav'),
+                    section = document.querySelector('section');
+                var navIndex = 1, sectionIndex = 1;
+                var rand = function () {
+                    return 'f' + (Math.random() + '').slice(-1);
+                };
+                navMore.onclick = function () {
+                    navIndex++;
+                    nav.insertAdjacentHTML('beforeEnd',
+                        '<h3 class="nav">导航' + navIndex + '</h3>');
+                };
+                moduleMore.onclick = function () {
+                    sectionIndex++;
+                    section.insertAdjacentHTML('beforeEnd',
+                        '<div class="module" style="background:#' + [rand(), rand(), rand()].join('') + '">模块' + sectionIndex + '</div>');
+                };
+            }
+        }
+    </script>
+</head>
+<body>
+<div class="box">
+    <nav>
+        <h3 class="nav">导航1</h3>
+    </nav>
+    <section>
+        <div class="module">模块1</div>
+    </section>
+</div>
+
+<input type="button" id="navMore" value="更多导航">
+<input type="button" id="moduleMore" value="更多模块">
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS023</title>
+    <!--
+        1、border-color：1，2，3，4个值的原理与padding，margin相同，都是 上(边框)，右(边框)，下(边框)，左(边框)。
+        2、border-width: 1，2，3，4个值的原理与padding，margin相同，都是 上(边框)，右(边框)，下(边框)，左(边框)。
+        3、只要是与三角形或者梯形相关的图形，都可以使用 border 属性来模拟。
+    -->
+
+    <style>
+        .origin {
+            width: 10px;
+            height: 10px;
+            border: 10px solid;
+            border-color: #f30 #00f #396 #0f0;
+        }
+
+        .triangle {
+            width: 10px;
+            height: 10px;
+            border: 10px solid;
+            border-color: #f30 transparent transparent;
+        }
+
+        .ladder {
+            width: 0;
+            border: 10px solid;
+            border-color: #f30 transparent transparent;
+        }
+
+        .triangle-long {
+            width: 0;
+            border-width: 20px 10px;
+            border-style: solid;
+            border-color: #f30 transparent transparent;
+        }
+
+        .triangle-double {
+            width: 0;
+            border-width: 20px 10px;
+            border-style: solid;
+            border-color: #f30 transparent transparent #f30;
+        }
+    </style>
+</head>
+<body>
+<div class="origin"></div>
+<hr>
+
+<div class="triangle"></div>
+<hr>
+
+<div class="ladder"></div>
+<hr>
+
+<div class="triangle-long"></div>
+<hr>
+
+<div class="triangle-double"></div>
+<hr>
+</body>
+</html>

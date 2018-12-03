@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS002</title>
+    <!--
+    需求:用一层html标签构建凹凸图形。
+    要点:1.使用inline-block的包裹性；
+        2.width设置为0，利用文本的首选最小宽度
+    -->
+    <style>
+        .ao,
+        .tu {
+            display: inline-block;
+            width: 0;
+            font-size: 14px;
+            line-height: 18px;
+            margin: 35px;
+            color: #fff;
+        }
+
+        .ao:before,
+        .tu:before {
+            outline: 2px solid #cd0000;
+            font-family: Consolas, Monaco, monospace;
+        }
+
+        .ao:before {
+            content: "love你love";
+        }
+
+        .tu {
+            direction: rtl;
+        }
+
+        .tu:before {
+            content: "我love你";
+        }
+    </style>
+
+</head>
+<body>
+<span class="ao"></span>
+<span class="tu"></span>
+</body>
+</html>

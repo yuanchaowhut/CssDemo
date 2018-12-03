@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS014</title>
+    <!--
+        1、div { padding: 50%; } 可以实现一个充满浏览器整个宽度的正方形效果。
+           padding-top:50% padding-bottom:50% 两者加起来正好100%，而padding的百分比是相对于宽度的，div的宽度是铺满整个浏览器，
+           故div的高度也与浏览器宽度相等，因为就得到一个"充满浏览器整个宽度的正方形"。
+           同理，div { padding: 25% 50%; } 可以得到一个宽度比为2：1的矩形，div { padding: 10% 50%; } 可以得到宽高比为 5：1的效果
+
+        2、 对于内联盒子的padding百分比
+            • 同样相对于宽度计算;
+            • 默认的高度和宽度细节有差异(内联元素默认的高度完全受 font-size 大小控制);
+            • padding 会断行;
+
+            对于内联盒子，如果要想通过padding: 50%得到正方形，必须将其ont-size设置为0，因为内联元素的垂直 padding 会让“幽灵空白节点”
+            显现，而幽灵空白节点是有高度的。
+             span {
+                  padding: 50%;
+                  font-size: 0;
+                  background-color: gray;
+             }
+    -->
+    <style>
+        .box {
+            border: 2px dashed #cd0000;
+        }
+        span {
+            padding: 50%;
+            background-color: gray;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <span>内有文字若干</span>
+</div>
+</body>
+</html>

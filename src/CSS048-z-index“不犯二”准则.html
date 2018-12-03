@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>CSS048</title>
+    <!--
+        1、对于非浮层元素，避免设置 z-index 值，z-index 值没有任何道理需要超过 2。
+           由于 z-index 不能超过 2，因此，我称其为“不犯二”准则。
+           (1)定位元素一旦设置了 z-index 值，就从普通定位元素变成了层叠上下文元素，相互间的层叠顺序就发生了根本的变化，
+              很容易出现设置了巨大的 z-index 值也无法覆盖其他元 素的问题。
+           (2)避免 z-index“一山比一山高”的样式混乱问题。此问题多发生在多人协作以及后期 维护的时候。例如，A 小图标定位，
+              习惯性写了个 z-index:9; B 一看，自己原来的实现被覆 盖了，立马写了个 z-index:99;结果比弹框组件层级还高，
+              那还得了，立马弹框组件来一个 z-index:999999;谁知后来，弹框中又要有出错提示效果......显然，最后项目的
+              z-index 层级管理就是一团糟。
+        2、
+    -->
+
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+</body>
+
+</html>
+

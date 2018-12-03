@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>CSS051</title>
+    <!--
+        1、word-spacing 和 letter-spacing 名称类似，其特性也有很多共通之处：
+        (1)都具有继承性。
+        (2)默认值都是 normal 而不是 0。通常情况下，两者表现并无差异。
+        (3)都支持负值，都可以让字符重叠，但是对于 inline-block 和 inline-table 元素却存在兼容性差异，Chrome 浏览器下可以重叠，
+           IE 和 Firefox 浏览器下则再大的负值也不会重 叠，因此不适合使用 word-spacing 来清除空白间隙。
+        (4)都支持小数值，如 word-spacing:0.5px。
+        (5)在目前的 CSS2.1 规范中，并不支持百分比值，但新的草案中新增了对百分值的支持， 是根据相对于字符的“步进宽度”(advance width)
+           计算的。
+        (6)间隔算法都会受到 text-align:justify 两端对齐的影响。 当然也有差异。letter-spacing 作用于所有字符，但 word-spacing
+           仅作用于空格字符。注意，是作用在“空格”上，而不是字面意义上的“单词”。例如，假设有以下 CSS 和 HTML:
+            .wp {
+              word-spacing: 20px;
+            }
+            <p class="wp">我love前端!</p>
+           love 虽然是一个单词，但没有空格，那么很抱歉，word-spacing 无效。
+       2、word-break:break-all 和 word-wrap:break- word  的区别：
+          顾名思义，word-break:break-all 的作用是所有的都换行，毫不留情，一点儿空隙都不放过，而 word-wrap:break-word 则带有怜悯之心，
+          如果这一行文字有可以换行的点，如空格或 CJK(中文/日文/韩文)之类的，就不打英文单词或字符的主意了，在这些换行点换行，至于对不对齐、
+          好不好看则不关心，因此，很容易出现一片一片空白区域的情况。
+    -->
+
+    <style>
+        p {
+            width: 300px;
+            padding: 5px;
+            background-color: #f0f3f9;
+            font-size: 14px;
+        }
+
+        .word-break {
+            word-break: break-all;
+        }
+
+        .word-wrap {
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+
+<body>
+<strong>word-break:break-all</strong>
+<p class="word-break">如果您在阅读过程中有任何疑问或者发现表述不严谨的地方，欢迎去官方论坛http://bbs.cssworld.cn进行反馈与交流。</p>
+<strong>word-wrap: break-word;</strong>
+<p class="word-wrap">如果您在阅读过程中有任何疑问或者发现表述不严谨的地方，欢迎去官方论坛http://bbs.cssworld.cn进行反馈与交流。</p>
+</body>
+</html>
+

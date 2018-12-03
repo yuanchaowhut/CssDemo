@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>CSS040</title>
+    <link rel="stylesheet" href="../lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../lib/css/font-awesome.min.css">
+    <!--
+        1、clip 属性必须和 absolute 属性或 fixed 属性一块使用才能生效。从0039我们可以看到 overflow属性经常不能对 absolute 元素
+           裁剪，但是 clip 不存在这种问题。
+        2、clip(top right bottom left) 括号内的4个属性并非CSS世界中解释的那样，是分别对上、右、下、左边缘的间距，而是 top bottom
+           都是针对上边缘的间距，right left 都是针对左边缘的间距，这也是为什么 clip(0 0 0 0) 可以隐藏一个元素的原因(如果按照Css世界
+           里的解释，应该得到的是原图才对)。
+        3、几个实用场景：
+           1）fixed 固定定位的剪裁(fixed元素的块容器是根元素，但是一样能被clip属性给裁剪，这一点 overflow 是做不到的)
+           2）最佳可访问性隐藏(隐藏某些需要存在但是肉眼不能看到的元素)
+              .clip {
+                  position: absolute;
+                  clip: rect(0 0 0 0);
+              }
+        4、在 Chrome 浏览器下，clip 仅仅是决定了哪一部分是可见的，对于原来占据的空间并无影响。但是如果原本有滚动条，cilip之后，chrom
+           浏览器仍然保留滚动条，而IE和firefox是没有滚动条的，只有光秃秃的一小撮背景色在那里。
+        5、使用 clip 进行剪裁的元素其 clientWidth 和 clientHeight 包括样式计算的宽高都还是原来的大小。
+
+        总结一下:clip 隐藏仅仅是决定了哪部分是可见的，非可见部分无法响应点击事件等; 然后，虽然视觉上隐藏，但是元素的尺寸依然是原本的尺寸，
+        在 IE 浏览器和 Firefox 浏览 器下抹掉了不可见区域尺寸对布局的影响，Chrome 浏览器却保留了。
+    -->
+
+    <style>
+        .box {
+            width: 500px;
+            height: 200px;
+            background: #cccccc;
+        }
+
+        .box > .img1 {
+            position: absolute;
+            left: 250px;
+            height: 300px;
+        }
+
+        .box > .img2 {
+            position: absolute;
+            clip: rect(20px 200px 200px 20px);
+            height: 300px;
+        }
+    </style>
+
+    <style>
+        .clip {
+            position: absolute;
+            clip: rect(0 0 0 0);
+        }
+
+        .box2 {
+            position: relative;
+            width: 500px;
+            height: 200px;
+            overflow: auto;
+            background: #cccccc;
+        }
+
+        .box2 > img {
+            position: absolute;
+            height: 300px;
+        }
+    </style>
+
+
+</head>
+<body>
+<div class="box">
+    <img class="img1" src="../images/027.jpg">
+    <img class="img2" src="../images/027.jpg">
+</div>
+<hr>
+
+<!--
+如何隐藏<h1>标签中的“CSS 世界”这几个文字，通常有以下一些技术选型。
+    • 下策是 display:none 或者 visibility:hidden 隐藏，因为屏幕阅读设备会忽略
+    这里的文字。
+    • text-indent 缩进是中策，但文字如果缩进过大，大到屏幕之外，屏幕阅读设备也
+    是不会读取的。
+    • color:transparent 是移动端上策，但却是桌面端中策，因为原生 IE8 浏览器并不
+    支持它。color:transparent 声明，很难用简单的方式阻止文本被框选。
+    • clip 剪裁隐藏是上策，既满足视觉上的隐藏，屏幕阅读设备等辅助设备也支持得很好。
+    .logo h1 {
+    position: absolute;
+    clip: rect(0 0 0 0);
+    }
+    clip 剪裁被我称为“最佳可访问性隐藏”的另外一个原因就是，它具有更强的普遍适应
+    性，任何元素、任何场景都可以无障碍使用。例如，我定义一个如下的 CSS 语句块:
+    .clip {
+    position: absolute;
+    clip: rect(0 0 0 0);
+    }
+就可以整站使用
+-->
+<a href="/" class="logo"><h1 class="clip">CSS 世界</h1>
+</a>
+<hr>
+<br>
+<br>
+<br>
+<br>
+
+<div class="box2">
+    <img class="clip" src="../images/027.jpg">
+</div>
+</body>
+</html>

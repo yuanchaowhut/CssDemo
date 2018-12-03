@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>CSS042</title>
+    <link rel="stylesheet" href="../lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../lib/css/font-awesome.min.css">
+    <!--
+        1、fixed 元素的包含块是html根元素。
+           fixed 元素的left:0;top:0 是定位到窗体的左上角位置；
+
+        2、和“无依赖的绝对定位”类似，fixed 也有“无依赖的固定定位”，利用 absolute/fixed 元素没有设置 left/top/right/bottom
+           的相对定位特性，可以将目标元素定位到我们想要的位置。与“无依赖的绝对定位”不同的是，它是固定在那个位置的，当浏览器滚动时，
+           它的位置固定不变。
+    -->
+
+    <style>
+        .box {
+            width: 500px;
+            height: 200px;
+            background: #cccccc;
+        }
+
+        .box > img {
+            position: relative;
+            top: -50px;
+            height: 150px;
+        }
+
+        .box1 {
+            width: 500px;
+            height: 200px;
+            background: #cccccc;
+        }
+
+        .box1 > img {
+            height: 150px;
+            margin-top: -50px;
+        }
+    </style>
+
+    <style>
+        .box2 {
+            width: 300px;
+            height: 300px;
+            margin: 20px auto;
+            background: #cccccc;
+        }
+
+        .box2 > img:nth-of-type(1) {
+            position: fixed;
+            width: 50px;
+        }
+
+        .box2 > img:nth-of-type(2) {
+            width: 200px;
+        }
+    </style>
+
+    <style>
+
+    </style>
+</head>
+<body>
+<div class="box">
+    <img src="../images/028.jpg">
+    <p>结果从视觉效果看，图片最终定位的位置是一样的，但是，图片后面的元素却表现出了明显的差异:margin 定位的图片后面的文字跟着上来了，
+        而使用 relative 定 位的图片后面的文字依然在原地纹丝不动，中间区域留出了一大块空白</p>
+</div>
+<hr>
+<br>
+<br>
+<br>
+
+<div class="box1">
+    <img src="../images/028.jpg">
+    <p>结果从视觉效果看，图片最终定位的位置是一样的，但是，图片后面的元素却表现出了明显的差异:margin 定位的图片后面的文字跟着上来了，
+        而使用 relative 定 位的图片后面的文字依然在原地纹丝不动，中间区域留出了一大块空白</p>
+</div>
+<hr>
+
+<div class="box2">
+    <img src="../icons/icon_hot_sell.png">
+    <img src="../images/028.jpg">
+</div>
+<hr>
+
+</body>
+</html>

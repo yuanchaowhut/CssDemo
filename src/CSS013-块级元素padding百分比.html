@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS013</title>
+    <!--
+        1、div { padding: 50%; } 可以实现一个充满浏览器整个宽度的正方形效果。
+           padding-top:50% padding-bottom:50% 两者加起来正好100%，而padding的百分比是相对于宽度的，div的宽度是铺满整个浏览器，
+           故div的高度也与浏览器宽度相等，因为就得到一个"充满浏览器整个宽度的正方形"。
+           同理，div { padding: 25% 50%; } 可以得到一个宽度比为2：1的矩形，div { padding: 10% 50%; } 可以得到宽高比为 5：1的效果
+
+    -->
+    <style>
+        .div {
+            padding: 50%;
+            background: magenta;
+        }
+
+        .box {
+            padding: 10% 50%;
+            position: relative;
+        }
+
+        .box > img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="div"></div>
+<div class="box">
+    <img src="../images/006.jpg">
+</div>
+</body>
+</html>

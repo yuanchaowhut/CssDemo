@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>CSS057</title>
+    <!--
+        案例一：头像剪裁的矩形镂空效果
+           IE8 浏览器不支持 rgba 颜色，因此这里借助了透明度滤镜进行兼容。由于 IE9 浏览器同时支持两者，因此借助:root 进行了重置;
+           包括 IE10 在内的 IE 浏览器下的镂空元素会有点击穿透的问题，这里采用的方法是使用 background 属性设置看不见的背景内容.
+
+        案例二:自动填满屏幕剩余空间的应用技巧
+           最关键的 CSS 就是设置一个超大轮廓范围的 outline 属性。例如，这里是 9999px，作用是保证无论屏幕多高，轮廓色块也一定能够覆盖。
+           和 border 属性不一样，outline 是无法指定方位的，只能被动地四周扩展。因此， outline:9999px solid #a0b3d6不仅会填满底部
+           方位的屏幕空间，还会把上面的内容空间也 填满。因此，这里采用的 clip 剪裁策略，让底部内容元素绝对定位，同时以上边缘和左边缘
+           为界进行裁剪，这样，就完全不用担心 outline 会覆盖上面的内容了。
+              {
+                  position: absolute;
+                  clip: rect(0 9999px 9999px 0);
+              }
+    -->
+
+    <style>
+        .crop {
+            position: relative;
+            width: 200px;
+            overflow: hidden;
+        }
+
+        .crop > .crop-area {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 80px;
+            height: 80px;
+            outline: 256px solid #000;
+            outline: 256px solid rgba(0, 0, 0, .5);
+            background: url(about:blank);
+            background: linear-gradient(to top, transparent, transparent);
+            filter: alpha(opacity=50);
+            cursor: move;
+        }
+
+        :root .crop-area {
+            filter: none;
+        }
+    </style>
+
+
+    <style>
+        .footer {
+            height: 50px;
+        }
+
+        .footer > p {
+            position: absolute;
+            left: 0;
+            right: 0;
+            text-align: center;
+            padding: 15px 0;
+            background-color: #a0b3d6;
+            outline: 9999px solid #a0b3d6;    /*outline是元素外部区域，和border类似，但不能指定方向*/
+            clip: rect(0 9999px 9999px 0);
+        }
+    </style>
+</head>
+
+<body>
+<!--头像剪裁的矩形镂空效果-->
+<div class="crop">
+    <img src="../images/031.jpg" width="200">
+    <div class="crop-area"></div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<!--自动填满屏幕剩余空间的应用技巧-->
+<div class="footer">
+    <p>我是Footer区域</p>
+</div>
+</body>
+</html>
+

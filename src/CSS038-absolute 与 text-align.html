@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>CSS038</title>
+    <link rel="stylesheet" href="../lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../lib/css/font-awesome.min.css">
+    <!--
+        1、内联水平的元素绝对定位后可以受 text-align 属性影响.
+           原理："幽灵空白节点"加"无依赖绝对定位"特性的综合作用
+
+    -->
+
+    <style>
+        p {
+            text-align: center;
+        }
+
+        p > img {
+            position: absolute;
+            /*display: block;*/
+            width: 200px;
+        }
+    </style>
+
+    <!--图片居中全浏览器兼容版本-->
+    <style>
+        p {
+            width: 600px;
+            height: 400px;
+            background-color: #eef0f6;
+            text-align: center;
+        }
+
+        img {
+            position: absolute;
+            width: 200px;
+            margin-left: -100px;
+        }
+
+        /* IE兼容处理 */
+        .compa {
+            font-size: .1px;
+            font-size: -webkit-calc(1px - 1px);
+        }
+
+        .compa:before {
+            content: "\2002";
+        }
+    </style>
+
+
+    <style>
+
+    </style>
+</head>
+<body>
+<p><img src="../images/023.jpg"></p>
+
+<div class="box">
+    <h4>全兼容版本</h4>
+    <p class="compa"><img src="../images/024.jpg"></p>
+</div>
+</body>
+</html>

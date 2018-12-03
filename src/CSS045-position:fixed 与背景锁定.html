@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>CSS045</title>
+    <script src="../lib/jquery-3.2.1.min.js"></script>
+    <!--
+        1、蒙层弹窗是网页中常见的交互，其中黑色半透明全屏覆盖的蒙层基本上都是使用 position: fixed 定位实现的。
+           但是存在2个问题：
+           1)蒙层无法覆盖浏览器右侧的滚动栏;
+           2)鼠标滚动的时候后面的背景内容依然可以被滚动，并没有被锁定。
+           原因：
+           问题1：fixed 的包含块是html根元素，而滚动条也是html产生的，系统规定的就是不能覆盖到滚动条。
+           问题2：滚动的是html根元素，因为html的overflow元素默认是auto,是可以根据内容高度进行滚动的。
+           解决办法：
+           1)问题2：参考"CSS0044-absolute 模拟 fixed 效果"的思路，让滚动条通过普通元素产生，滚动也在普通元素里进行。
+           2)问题2：
+               方法一：解决问题1的时候，实际上已经解决了问题2。（但是如果调整项目的滚动结构不方便，还可以采用方法2）
+               方法二：Javascript 代码实现：在打开蒙层时，将html, body的 overflow 设置为hidden，禁止窗口滚动；
+                      关闭蒙层时将html, body的 overflow 恢复原样。
+
+    -->
+
+    <style>
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .fixed {
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            display: none;
+            background: rgba(7, 17, 27, 0.5);
+        }
+
+        /*产生滚动条的普通元素*/
+        .scroll {
+            height: 100%;
+            overflow: auto;
+        }
+
+        .scroll > button {
+            display: block;
+            margin: 0 auto;
+            font-size: 16px;
+        }
+
+        .content {
+            height: 2000px;
+            background: linear-gradient(red, green, blue);
+        }
+
+    </style>
+
+    <script>
+        //本例由于已经改造成 普通元素滚动而不是根元素滚动，所以部分js代码屏蔽掉了一样可以达到效果。
+        //如果不调整滚动结构，那么下面注释掉的代码需要打开！
+        window.onload = function () {
+            $('#open').click(function () {
+                // var widthBar = 0;
+                // var root = document.documentElement;
+                // if (typeof window.innerWidth == 'number') {
+                //     widthBar = window.innerWidth - root.clientWidth;
+                // }
+                // root.style.overflow = 'hidden';
+                // root.style.borderRight = widthBar + 'px solid transparent';
+                $('.fixed').css({"display": "block"});
+            });
+
+            $('.fixed').click(function () {
+                // var root = document.documentElement;
+                // root.style.overflow = '';
+                // root.style.borderRight = '';
+                $(this).css({"display": "none"});
+            });
+        }
+    </script>
+</head>
+<body>
+<div class="fixed">
+    <h3>蒙版图层</h3>
+</div>
+<div class="scroll">
+    <button id="open" type="button">打开蒙层</button>
+    <div class="content"></div>
+</div>
+</body>
+</html>
+
+
+<!--
+如果是移动端项目，阻止 touchmove 事件的默认行为可以防止滚动;如果是桌面端项目， 可以让根元素直接 overflow:hidden。
+但是，Windows 操作系统下的浏览器的滚动条都是占据一定宽度的，滚动条的消失必然会导致页面的可用宽度变化，页面会产生体验更糟糕的晃动问题，
+那怎么办呢?很简单，我们只需要找个东西填补消失的滚动条就好了。那该找什么东西 填充呢?这时候就轮到功勋卓越的 border 属性出马了—
+消失的滚动条使用同等宽度的透明边框填充!
+-->

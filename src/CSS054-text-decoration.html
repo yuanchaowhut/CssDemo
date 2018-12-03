@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>CSS054</title>
+    <!--
+        1、用 border-bottom 代替 underline ，解决下划线和中文文字的下边缘粘连在一起的问题；
+        2、删除线效果使用 <del></del>标签即可，完全没必要先使用 span 或 p 标签然后再用 text-decoration:line-through;
+        3、 text-transform 字符大小写
+    -->
+
+    <style>
+        .underline {
+            text-decoration: none;
+            border-bottom: 1px solid; /* border-color 省略，会使用文字的 color 颜色作为边框色*/
+            padding-bottom: 2px;
+        }
+
+        a:hover {
+            color: #ff0000;
+        }
+    </style>
+
+    <style>
+        .big {
+            font-size: 16px;
+        }
+
+        .small {
+            color: red;
+            font-size: 12px;
+            text-decoration: line-through;
+        }
+
+        .del{
+            color: red;
+            font-size: 12px;
+        }
+    </style>
+
+    <style>
+        .idCard{
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+
+<body>
+<h3>下划线</h3>
+<p>使用 text-decoration:underline 显示下划线，<a class="underline" href="#">链接地址</a></p>
+<p>使用 border-bottom 显示下划线，<a href="#">链接地址</a></p>
+<hr>
+
+<h3>删除线</h3>
+<div class="big">¥179 <span class="small">¥299</span></div>
+<div class="big">¥179 <del class="del">¥299</del></div>
+<hr>
+
+<h3>英文字母大小写</h3>
+<label>请输入身份证号码</label>
+<input class="idCard" type="text" />
+</body>
+</html>
+

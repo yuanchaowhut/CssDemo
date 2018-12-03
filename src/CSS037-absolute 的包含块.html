@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>CSS037</title>
+    <link rel="stylesheet" href="../lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../lib/css/font-awesome.min.css">
+    <!--
+        1、包含块(containing block):元素用来计算和定位 的一个框.
+           (1)根元素(很多场景下可以看成是<html>)被称为“初始包含块”，其尺寸等同于浏览 器可视窗口的大小。
+           (2)如果该元素的 position 是 relative 或者 static，则“包含块” 由其最近的块容器祖先盒的 content box 边界形成。
+           (3)如果元素 position:fixed，则“包含块”是“初始包含块”。
+           (4)如果元素 position:absolute，则“包含块”由最近的 position 不为 static 的祖先元素建立.
+           如果没有符合条件的祖先元素，则“包含块”是“初始包含块”。
+
+        2、与常规元素相比，absolute 绝对定位元素的“包含块”有以下 3 个明显差异：
+           (1)内联元素也可以作为“包含块”所在的元素;
+           (2)“包含块”所在的元素不是父块级元素，而是最近的 position 不为 static 的祖先元素或根元素;
+           (3)边界是 padding box 而不是 content box。
+
+        3、absolute 是非常独立的 CSS 属性值，其样式和行为表现不依赖其他 任何 CSS 属性就可以完成。
+           eg.一个绝对定位元素，没 有任何 left/top/right/bottom 属性设置，并且其祖先元素全部都是非定位元素，其位置在哪里?
+           很多人都认为是在浏览器窗口左上方。这是关于 absolute 绝对定位最典型的错误认知，实际上，还是当前位置。
+        4、无依赖绝对定位的2个非常有用的特性：“相对性”和“不占据空间”。
+           "无依赖绝对定位"本质上是一个不占据父元素空间的相对定位！
+           实例:
+           1、各类图标定位：position:absolute，辅以 margin 属性进行定位
+           2、超越常规布局的排版(表单实例)
+           3、下拉列表的定位
+
+    -->
+    <!--一般写法-->
+    <style>
+        .box {
+            position: relative;
+        }
+
+        .box > .hot-sell {
+            position: absolute;
+            left: 0;
+            right: 0;
+        }
+    </style>
+
+    <!--CSS基础扎实的写法(无依赖绝对定位,本质上就是相对定位特性，仅仅是不占据CSS流的尺寸空间而已)-->
+    <style>
+        .box2 > .hot-sell {
+            position: absolute;
+        }
+    </style>
+
+    <style>
+        .nav-list {
+            padding: 0;
+            margin: 0;
+            list-style-type: none;
+            font-size: 0;
+        }
+
+        .nav {
+            display: inline-block;
+            width: 100px;
+            height: 30px;
+            border-right: 1px solid #ffffff;
+            line-height: 30px;
+            color: #000;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            background: #cccccc;
+        }
+
+        .nav:last-child {
+            border-right: none;
+        }
+
+        .nav:hover {
+            background: #8c8c8c;
+        }
+
+        .icon-hot {
+            position: absolute;
+            margin: -6px 0 0 2px;
+            width: 25px;
+            height: 25px;
+        }
+    </style>
+
+    <style>
+        .icon-asterisk {
+            margin-right: 10px;
+            color: #E73527;
+            font-size: 14px;
+        }
+
+        .text {
+            margin-left: 30px;
+            width: 200px;
+        }
+
+        .error {
+            position: absolute;
+            margin-left: 10px;
+            color: #E73527;
+        }
+
+        .register-wrapper {
+            padding-top: 20px;
+            text-align: center;
+        }
+
+        .register {
+            padding: 5px 10px;
+            color: #ffffff;
+            background: #BD0E1C;
+        }
+    </style>
+
+    <style>
+        .search-input {
+            width: 200px;
+            height: 20px;
+            line-height: 20px;
+            padding: 9px 39px 9px 9px;
+            border: 1px solid #ddd;
+        }
+
+        /* 搜索按钮的无依赖绝对定位 */
+        .search-btn {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            margin: 1px 0 0 -20px;
+            border: 1px solid #fff;
+            background: #ddd url(../icons/search.png) no-repeat center;
+        }
+
+        /* 下拉列表的无依赖绝对定位 */
+        .search-datalist {
+            position: absolute;
+            width: 200px;
+            border: 1px solid #e6e8e9;
+            background-color: #fff;
+        }
+
+        .search-datalist > a {
+            display: block;
+            padding-left: 10px;
+            color: #000;
+            text-decoration: none;
+        }
+
+        .search-datalist > a:hover {
+            background: #cccccc;
+        }
+
+        /* 搜索列表的显隐控制 */
+        .search-result {
+            display: none;
+        }
+
+        .search-input:focus ~ .search-result {
+            display: block;
+        }
+    </style>
+
+    <style>
+        /* 和输入框一样的样式 */
+        .placeholder, .input {
+            width: 200px;
+            height: 40px;
+            line-height: 40px;
+            border: 1px solid #ddd;
+        }
+
+        /* 占位符元素特有样式 */
+        .placeholder {
+            position: absolute;
+            border: none;
+            color: #cccccc;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <img src="../images/022.jpg" width="200">
+    <img class="hot-sell" src="../icons/icon_hot_sell.png" width="50">
+</div>
+<hr>
+
+<div class="box2">
+    <!--注意此处顺序变了-->
+    <img class="hot-sell" src="../icons/icon_hot_sell.png" width="50">
+    <img src="../images/022.jpg" width="200">
+</div>
+<hr>
+
+<!--1.各类图标定位-->
+<!-- position:absolute，辅以 margin 属性进行定位-->
+<ul class="nav-list">
+    <li class="nav">普通导航</li>
+    <li class="nav">热门导航<img class="icon-hot" src="../icons/icon_hot_sell2.png"></li>
+    <li class="nav">新导航</li>
+</ul>
+<hr>
+
+<table>
+    <tr>
+        <td><i class="icon-asterisk"></i><label>邮箱</label></td>
+        <td><input class="text" type="text" placeholder="请输入邮箱"><label class="error">邮箱不正确</label></td>
+    </tr>
+    <tr>
+        <td><i class="icon-asterisk"></i><label>密码</label></td>
+        <td><input class="text" type="text" placeholder="请输入密码"><label class="error">密码不正确</label></td>
+    </tr>
+    <tr>
+        <td><i class="icon-asterisk"></i><label>手机号码</label></td>
+        <td><input class="text" type="text" placeholder="请输入手机号码"><label class="error">手机号码不正确</label>
+        </td>
+    </tr>
+    <tr>
+        <td class="register-wrapper" colspan="2">
+            <button class="register" type="button">立即注册</button>
+        </td>
+    </tr>
+</table>
+<hr>
+
+<!--下拉列表的定位-->
+<div class="search-box">
+    <input class="search-input" placeholder="搜索"><a href="javascript:" class="search-btn"></a>
+    <div class="search-result">
+        <div class="search-datalist">
+            <a href>搜索结果1</a>
+            <a href>搜索结果2</a>
+            <a href>搜索结果3</a>
+            <a href>搜索结果4</a>
+            <a href>搜索结果5</a>
+        </div>
+    </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<hr>
+<div>
+    <label class="placeholder" for="test">占位符</label>
+    <input id="test" class="input" type="text">
+</div>
+</body>
+</html>

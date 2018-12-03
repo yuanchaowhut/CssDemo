@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS029</title>
+    <link rel="stylesheet" href="../lib/css/font-awesome.min.css">
+    <!--
+        1、inline-block 与 baseline
+           vertical-align 属性的默认值 baseline 在文本之类的内联元素那里就是字符 x 的下边缘，对于替换元素则是替换元素的下边缘。
+           但是，对于 inline-block 元素，则规则要复杂了:一个 inline-block 元素，如果里面没有内联元素，或者 overflow 不是 visible，
+           则该元素的基线就是其 margin 底边缘;否则其基线就是元素里面最后一行内联元素的基线。
+
+        2、vertial-align:top：垂直上边缘对齐
+           内联元素:元素顶部和当前行框盒子的顶部对齐.
+           table-cell 元素:元素顶 padding 边缘和表格行的顶部对齐
+           用更通俗的话解释就是:如果是内联元素，则和这一行位置最高的内联元素的顶部对齐;
+           如果 display 计算值是 table-cell 的元素，我们不妨脑补成<td>元素，则和<tr>元素上边缘对齐。
+
+        3、vertial-align:bottom：垂直下边缘对齐
+           内联元素:元素底部和当前行框盒子的底部对齐.
+           table-cell 元素:元素底 padding 边缘和表格行的底部对齐
+           用更通俗的话解释就是:如果是内联元素，则和这一行位置最低的内联元素的底部对齐;
+           如果 display 计算值是 table-cell 的元素，我们不妨脑补成<td>元素，则和<tr>元素下边缘对齐。
+        4、vertial-align:middle：与近似垂直居中
+           a)内联元素:元素的垂直中心点和行框盒子基线往上 1/2 x-height 处对齐。从“基线往上 1/2x-height 处”我们就可以看出是字符
+           x 中心交叉点的位置。换句话说就是，vertial-align:middle 可以让内联元素的真正意义上的垂直中心位置和字符 x 的交叉点对齐。
+           但是基本上所有的字体中，字符 x 的位置都是偏下一点儿的，font-size 越大偏移越明显，所以默认的 vertial-align:middle
+           实现的都是“近似垂直居中”。
+           b)table-cell 元素:单元格填充盒子相对于外面的表格行居中对齐。
+
+        5、vertical-align:text-top：盒子的顶部和父级内容区域的顶部对齐。
+           vertical-align:text-bottom:盒子的底部和父级内容区域的底部对齐。
+           所谓“父级内容区域”指的就是在父级元素当前 font-size 和 font-family 下应有的内容区域大小。可以理解为(以 text-top 举例):
+           假设元素后面有一个和父元素 font- size、font-family 一模一样的文字内容，则 vertical-align:text-top 表示元素和这个文字
+           的内容区域的上边缘对齐。与vertical-align:top不同，后者对齐的是行框盒子的顶部，而行框盒子的顶部是最高的内联盒子的顶部。
+           演示：https://demo.cssworld.cn/5/3-9.php
+
+        6、对于内联元素，如果大家遇到不太好理解的现象， 请一定要意识到，有个“幽灵空白节点”以及无处不在的 vertical-align 属性
+           虽然同属线性类属性值，但是 top/bottom 和 baseline/middle 却是完全不同的两个帮派，前者对齐看边缘看行框盒子，
+           而后者是和字符 x 打交道。
+    -->
+
+    <style>
+        .baseline {
+            display: inline-block;
+            width: 150px;
+            height: 150px;
+            border: 1px solid #cad5eb;
+            background-color: #f0f3f9;
+        }
+    </style>
+
+    <style>
+        .baseline2 {
+            display: inline-block;
+            width: 150px;
+            height: 150px;
+            border: 1px solid #cad5eb;
+            background-color: #f0f3f9;
+        }
+        /*因为字符实际占据的高度是由 line-height 决定的，当 line-height 变成 0 的时候，字符占据的高度也是 0，此时，高度的起始位置
+           就变成了字符内容区域的垂直中心位置，于是文字就有一半落在框的外面了。*/
+        .text{
+            line-height: 0
+        }
+
+        .text2{
+            font-size: 0;
+        }
+    </style>
+
+    <style>
+        .box {
+            width: 300px;
+            height: 200px;
+            background: #ff00ff;
+        }
+
+        .img{
+            vertical-align: bottom;
+        }
+    </style>
+
+    <style>
+        .box2 {
+            width: 300px;
+            height: 150px;
+            background: #ff00ff;
+        }
+        .box2 > span{
+            line-height: 150px;
+            /*font-size: 80px;*/
+            font-size: 0px;
+            vertical-align: middle;
+        }
+        .img2{
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <span class="baseline"></span>
+    <span class="baseline">x-baseline</span>
+    <br>
+    <br>
+    <br>
+    <span class="baseline2"></span>
+    <span class="baseline2 text">x-baseline</span>
+    <br>
+    <br>
+    <br>
+    <span class="baseline2"></span>
+    <span class="baseline2 text">&nbsp;</span>
+    <br>
+    <br>
+    <br>
+    <span class="baseline2"></span>
+    <span class="baseline2 text2"></span>
+    <br>
+    <br>
+    <br>
+    <div class="box">
+        <img src="../images/011.jpg" height="100">
+        <img class="img" src="../images/011.jpg" height="100">
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="box2">
+        <img class="img2" src="../images/012.jpg" height="100">
+        <span>x</span>
+    </div>
+</div>
+</body>
+</html>

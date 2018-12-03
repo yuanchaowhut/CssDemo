@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS007</title>
+    <!--
+        本例是一个通用的方法。它并不关心box里具体是什么内容，正因为不清楚box的具体内容，所以height属于未知，
+        所以这里使用了一个max-height属性。需要注意的是max-height展开后的值一定要设置为一个较大的安全值，否则
+        内容就会显示不全。
+    -->
+    <style>
+        .box {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height .25s;
+        }
+
+        .expand {
+            max-height: 1500px;
+        }
+    </style>
+
+    <script src="../lib/jquery-3.2.1.min.js"></script>
+    <script>
+        $(function () {
+            var isExpand = false;
+            $("#toggle").click(function () {
+                isExpand = !isExpand;
+                if (isExpand) {
+                    $(".box").addClass("expand");
+                    // $(".box").css("max-height", "1500px");
+                    $("#toggle").val("收起");
+                } else {
+                    $(".box").removeClass("expand");
+                    // $(".box").css("max-height", "0");
+                    $("#toggle").val("展开");
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+<button id="toggle" type="button">展开</button>
+<div class="box">
+    <img src="../images/003.jpg">
+</div>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>CSS052</title>
+    <!--
+        1、white-space 的处理模型：white-space 属性声明了如何处理元素内的空白字符，这类空白字符包括 Space(空格) 键、Enter(回车)键、
+           Tab(制表符)键产生的空白。因此，white-space 可以决定图文内容 是否在一行显示(回车空格是否生效)，是否显示大段连续空白(空格是否
+           生效)等。
+        2、合并空格: 让多个空格变成 1 个，也就是我们平常看到的效果，敲了 10 个空格，结果页面就 1 个空格。
+           合并换行: 会把多个连续换行合并成 1 个，并当作 1 个普通空格处理，就是键盘空格键敲出来的那个空格。
+           文本环绕: 一行文字内容超出容器宽度时，会自动从下一行开始显示。
+        3、white-space 与最大可用宽度：当 white-space 设置为 nowrap 的时候，元素的宽度此时表现为“最大可用宽度”，换行符和一些空格
+           全部合并，文本一行显示。
+           (1)“包含块”尺寸过小处理："一柱擎天"效果，可以通过white-space:nowrap 解决掉；
+           (2)单行文字溢出点点点效果。text-overflow:ellipsis 文字内容超出打点效果离不开 white-space:nowrap 声明。
+           (3)水平列表切换效果。水平列表切换是网页中常见的交互效果，如果列表的数目是不固定的，使用 white-space:nowrap 使列表一行
+              显示会是个非常不错的处理。
+    -->
+
+    <style>
+        .title{
+            width: 360px;
+            text-align: center;
+            margin: 10px auto;
+        }
+        table {
+            margin: 10px auto;
+            border-collapse: collapse;
+        }
+
+        table td {
+            width: 80px;
+            padding: 5px;
+            border: 1px solid #cccccc;
+        }
+    </style>
+
+    <style>
+        .box{
+            width: 10px;
+        }
+        .box2{
+            width: 10px;
+            white-space: nowrap;
+        }
+
+        .box3{
+            width: 100px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+    </style>
+
+    <style>
+        .box4 {
+            width: 300px;
+            height: 50px;
+            position: relative;
+            overflow: auto;
+        }
+        .box4 > ul {
+            position: absolute;
+            white-space: nowrap;
+            padding: 0;
+            margin: 0;
+        }
+        .box4 > ul > li {
+            display: inline-block;
+            padding: 5px;
+        }
+
+        .box4 > ul > li:hover {
+            background: #8c8c8c;
+        }
+
+    </style>
+</head>
+
+<body>
+<div>
+    <h3 class="title">white-space 不同属性值功能示意</h3>
+    <table>
+        <thead>
+        <tr>
+            <td>属性</td>
+            <td>换行</td>
+            <td>空格和制表</td>
+            <td>文本环绕</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>normal</td>
+            <td>合并</td>
+            <td>合并</td>
+            <td>环绕</td>
+        </tr>
+        <tr>
+            <td>nowrap</td>
+            <td>合并</td>
+            <td>合并</td>
+            <td>不环绕</td>
+        </tr>
+        <tr>
+            <td>pre</td>
+            <td>保留</td>
+            <td>保留</td>
+            <td>不环绕</td>
+        </tr>
+        <tr>
+            <td>pre-wrap</td>
+            <td>保留</td>
+            <td>保留</td>
+            <td>环绕</td>
+        </tr>
+        <tr>
+            <td>pre-line</td>
+            <td>保留</td>
+            <td>合并</td>
+            <td>环绕</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<hr>
+<div class="box">
+    一柱擎天效果
+</div>
+<hr>
+
+<div class="box2">
+    限制一柱擎天效果
+</div>
+<hr>
+
+<div class="box3">
+    单行文字溢出点点点效果
+</div>
+<hr>
+
+<div class="box4">
+<ul>
+    <li>热卖商品</li>
+    <li>家电产品</li>
+    <li>数码产品</li>
+    <li>服装服饰</li>
+    <li>书籍百科</li>
+    <li>生活用品</li>
+    <li>店铺介绍</li>
+</ul>
+</div>
+</body>
+</html>
+

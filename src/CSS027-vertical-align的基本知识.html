@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS027</title>
+    <link rel="stylesheet" href="../lib/css/font-awesome.min.css">
+    <!--
+        1、vertical-align 属性值分为以下 4 类:
+            • 线类，如 baseline(默认值)、top、middle、bottom;
+            • 文本类，如 text-top、text-bottom;
+            • 上标下标类，如 sub、super;
+            • 数值百分比类，如 20px、2em、20%（(相对于line-height)）等
+        2、vertical-align 的默认值是 baseline，即基线对齐，而基线的定义是字母 x 的 下边缘，因此，内联元素默认都是沿着字母 x
+           的下边缘对齐的。对于图片等替换元素，往往使用元素本身的下边缘作为基线。
+        3、vertical-align 设置为数值或百分比时(相对于line-height)根据计算值的不同，相对于基线往上或往下偏移，vertical- align
+           的计算值如果是负值，往下偏移，如果是正值，往上偏移，而且数值大小全部都是相对于基线位置计算的，因此，从这一点来看，
+           vertical-align:baseline 等同于 vertical-align:0。
+        4、vertical-align 作用的前提：只能应用于内联元素以及 display 值为 table-cell 的元素
+           (inline,inline- block,inline-table,table-cell)。
+        5、CSS 中有一些属性值会默默地改变元素 display 属性的计算值，从而导致 vertical-align 不起作用。
+           比方说，浮动和绝对定位会让元素块状化。
+        6、对 table-cell 元素而言，vertical-align 起作用的是 table-cell 元素自身,因此若要table-cell 元素内的子元素如图片垂直居中，
+           需要对table-cell 元素设置vertical-align:middle 而不是对子元素进行设置。虽然就效果而言，table-cell 元素设置 vertical-align
+           垂直对齐的是子元素，但是其作用的并不是子元素，而是 table-cell 元素自身。就算 table-cell 元素的子元素是一个块级元素，
+           也一样可以让其有各 种垂直对齐表现。
+        7、box4 中图片的 margin-top:-9999px，按理说应该跑到上面不知道什么地方去了，但是实际情况是图片并未离开容器 box4. 这是因为
+           在 CSS 中，非主动触发位移的内联元素是不可能跑到计算容器外面的，导致图片的位置被“幽灵空白节点”的 vertical-align:baseline
+           给限死了，所以图片一定要与“幽灵空白节点”的的基线对齐，也就不可能完全离开容器。
+    -->
+
+    <style>
+        .icon-angle-down {
+            vertical-align: 10px;
+        }
+    </style>
+
+    <style>
+        .box {
+            height: 200px;
+            line-height: 200px; /*撑开"幽灵空白节点"*/
+            background: #cccccc;
+        }
+
+        .box > img {
+            height: 100px;
+            vertical-align: middle; /*垂直居中*/
+        }
+    </style>
+
+    <style>
+        .cell {
+            display: table-cell;
+            width: 200px;
+            height: 200px;
+            vertical-align: middle; /*对比上例,vertical-align 是设置在table-cell元素上而不是图片上*/
+            background: #cccccc;
+        }
+
+        .cell > img {
+            height: 100px;
+        }
+    </style>
+
+    <style>
+        .box2 {
+            line-height: 32px;
+            background: #cccccc;
+        }
+
+        .box2 > span {
+            font-size: 28px;
+        }
+    </style>
+
+    <style>
+        .box3 {
+            line-height: 32px;
+            font-size: 28px;
+            background: #cccccc;
+        }
+
+        .box3 > span {
+
+        }
+    </style>
+
+    <style>
+        .box4 {
+            width: 300px;
+            margin-top: 100px;
+            background: #cccccc;
+        }
+        .box4 > img{
+            height: 150px;
+            margin-top: -9999px;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <div>
+        <span style="font-size: 50px">Hello World</span>
+        <i class="icon-angle-down"></i>
+    </div>
+    <br>
+    <br>
+    <br>
+
+    <div class="box">
+        <img src="../images/009.jpg">
+    </div>
+    <br>
+    <br>
+    <br>
+
+    <div class="cell">
+        <img src="../images/009.jpg">
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="box2">
+        x<span>文字 x</span>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="box3">
+        <!--字符x用来模拟"幽灵空白节点",x与span内的文本字号不一样，字号越大baseline越低，两者的baseline就有了差异，
+        由于内联元素文字默认全部都是基线对齐，所以就两者就会发生上下位移，如果位移距离足够大，就会超过行高的限制，从而
+        把父容器撑开一小段额外的高度导致父容器高度变大。解决办法很简单，就是讲幽灵空白节点的字号大小设置为与span相同，
+        也就是将 font-size 设置给父容器即可！-->
+        x<span>文字 x</span>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="box4">
+        x<img src="../images/010.jpg">
+    </div>
+
+</div>
+</body>
+</html>

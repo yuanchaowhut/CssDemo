@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>CSS053</title>
+    <!--
+        1、text-align:justify 两端对齐: 通过使用下面的 CSS 代码组合就可以实现全部浏览器都兼容的中文两端对齐效果.
+           .justify {
+                  text-align: justify;
+                  text-justify: inter-ideograph;
+            }
+        2、text-align:justify 要想有两端对齐的效果，需要满足两点:
+           一是有分隔点，如空格、换行符等;
+           二是要超过一行，此时非最后一行内容会两端对齐。
+        3、伪元素填充法
+        4、辅助列表占位
+           (1)关于占位标签的个数：占位标签的个数和列表的列数保持一样就可以，多了无用，少了不行
+           (2)关于使用空标签心理障碍：只要功能实现、代码健壮、兼容性好、对SEO无干扰，何乐而不为
+    -->
+
+    <style>
+        .text {
+            width: 400px;
+            background: #5bc0de;
+        }
+
+        .justify {
+            text-align: justify;
+            text-justify: inter-ideograph; /*国际象形文字*/
+        }
+    </style>
+
+    <!--伪元素填充法-->
+    <style>
+        .justify2 {
+            text-align: justify;
+            /*font-size: 0;*/
+            /*
+             * 为了兼容IE和chrome。IE浏览器font-size为 0 时表现为"空格好像不存在，无法两端对齐"，
+             * chrome浏览器有一个最小 12px 的 font-size 限制，当设置 font-size 为 .1px 时，浏览器显示为12px.
+             */
+            font-size: .1px;
+            font-size: -webkit-calc(0px + 0px);
+            background: #cccccc;
+        }
+
+        /*伪元素的目的是为了满足第二点条件："超过一行，此时非最后一行内容会两端对齐"*/
+        .justify2:after {
+            content: "";
+            display: inline-table;
+            width: 100%;
+            vertical-align: bottom;
+        }
+
+        .justify2 li {
+            display: inline-block;
+            text-align: center;
+            font-size: 16px;
+        }
+    </style>
+
+    <!--辅助列表占位-->
+    <style>
+        .justify3 {
+            width: 500px;
+            text-align: justify;
+            font-size: 0;
+            background: #cccccc;
+        }
+
+        .justify3 li {
+            display: inline-block;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .placeholder {
+            display: inline-block;
+            width: 128px;
+            vertical-align: bottom;
+        }
+    </style>
+</head>
+
+<body>
+<h3>文本两端对齐</h3>
+<p class="text justify">全部浏览器都兼容的中文两端对齐效果。这是一段临时想出来的文案，其中可能参杂了几个英文单词，例如CSS，例如JS等</p>
+<hr>
+
+<h3>两端对齐布局</h3>
+<ul class="justify2">
+    <li>
+        <img src="../images/027.jpg" width="200" height="300">
+        <p>图标描述 1</p>
+    </li>
+    <li>
+        <img src="../images/028.jpg" width="200" height="300">
+        <p>图标描述 2</p>
+    </li>
+</ul>
+<hr>
+
+<h3>多行两端对齐布局</h3>
+<ul class="justify3">
+    <li><img src="../images/029.jpg" width="128" height="192"><p>描述1</p></li>
+    <li><img src="../images/030.jpg" width="128" height="192"><p>描述2</p></li>
+    <li><img src="../images/031.jpg" width="128" height="192"><p>描述3</p></li>
+    <li><img src="../images/032.jpg" width="128" height="192"><p>描述4</p></li>
+    <li><img src="../images/033.jpg" width="128" height="192"><p>描述5</p></li>
+    <li class="placeholder"></li>
+    <li class="placeholder"></li>
+    <li class="placeholder"></li>
+</ul>
+</body>
+</html>
+

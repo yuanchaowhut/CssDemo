@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>CSS035</title>
+    <!--
+        1、彻底清除浮动的影响，最适合的属性不是 clear 而是 overflow。一般使用 overflow:hidden，利用 BFC 的“结界”特性
+           彻底解决浮动对外部或兄弟元素的影响。很多其他 CSS 声明也能清除浮动，但基本上都会让元素的宽度表现为“包裹性”，
+           也就是会影响原来的样式布局，而 overflow:hidden 声明不会影响元素原先的流体特性或宽度表现，因此在我看来是最佳“结界”。
+        2、一个设置了overflow:hidden声明的元素，假设同时存在border属性和padding属性，则当子元素内容超出容器宽度高度限制的时候，
+           剪裁的边界是 border box 的内边缘，而非 padding box 的内边缘.
+    -->
+
+    <style>
+        .box {
+            width: 200px;
+            height: 80px;
+            padding: 10px;
+            border: 10px solid;
+            overflow: hidden;
+        }
+
+        .box2 {
+            width: 200px;
+            height: 80px;
+            padding: 10px;
+            border: 10px solid transparent;  /*如果想实现元素剪裁同时四周留有间隙的效果的话，可以试试使用透明边框*/
+            overflow: auto;
+        }
+    </style>
+
+    <style>
+
+    </style>
+
+    <style>
+
+    </style>
+
+    <style>
+
+    </style>
+</head>
+<body>
+<!--overflow 剪裁界线 border box-->
+<div class="box">
+    <img src="../images/018.jpg" height="300">
+</div>
+<hr>
+
+<!--如果想实现元素剪裁同时四周留有间隙的效果的话，可以试试使用透明边框-->
+<div class="box2">
+    <img src="../images/018.jpg" height="300">
+</div>
+</body>
+</html>

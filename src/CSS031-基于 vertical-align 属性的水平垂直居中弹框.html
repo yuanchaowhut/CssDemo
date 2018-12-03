@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>CSS031</title>
+    <link rel="stylesheet" href="../lib/css/font-awesome.min.css">
+    <!--
+
+    -->
+
+    <style>
+        .container {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            text-align: center;
+            font-size: 0;
+            white-space: nowrap;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, .5);
+        }
+
+        .container:after {
+            display: inline-block;
+            height: 100%; /*改变它可以改变对话框垂直居中的位置*/
+            content: '';
+            vertical-align: middle;
+        }
+
+        .dialog {
+            display: inline-block;
+            width: 60%; /*改变它可以改变对话框的宽度*/
+            vertical-align: middle;
+            text-align: left;
+            font-size: 14px;
+            white-space: normal;
+            background: #ffffff;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="dialog">
+        <h2>标题</h2>
+        <hr>
+        <p>下面是原理作用的关键部分，在 5.3.7 节讲过如何分析多个 vertical-align 的作用，根据定义专注当前元素即可。vertical-align:middle 定义是元素的中线和字符 x 中心点对齐。</p>
+        <p>(1)在本例中，由于 font-size 设置为 0，所以 x 中心点位置就是.container 的上边缘，此时，高度100%的宽度为 0 的伪元素和这个中心点对齐。如果中心点位置不动，这个伪
+            元素上面一半的位置应该在.container 的外面，但是 CSS 中默认是左上方排列对齐的，所以， 伪元素和这个原本在容器上边缘的 x 中心点一起往下移动了半个容器高度，也就是此时 x 中心
+            点就在容器的垂直中心线上。</p>
+        <p>(2)弹框元素.dialog 也设置了 vertical-align:middle。根据定义，弹框的垂直中心位置和 x 中心点位置对齐，此时，x 中心点就在容器的垂直中心位置，于是.dialog 元素就
+            和容器的垂直中心位置对齐了，从而实现了垂直居中效果。</p>
+        <p>(3)水平居中就 text-align:center 实现，非常好理解。</p>
+    </div>
+</div>
+</body>
+</html>

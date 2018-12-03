@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>CSS046</title>
+    <!--
+        1、.box是一个普普通通的元素，图片元素所在的层叠上下文元素一定是.box的某个祖先元素。由于z-index 负值在 block 元素的下面。
+           本例中，图片是 z-index 负值元素，.box 是 block 元素，也就是图片应该在.box 元素的后面显示，因此，图片会被.box 元素。
+           的蓝色背景覆盖。
+        2、给.box 元素加个样式，使其具有层叠上下文，这里就使用不影响视觉表现的 transform 属性。CSS3 transform 可以让元素具有新
+           的层叠上下文，由于z-index 负值在层叠上下文元素的背景色之上，也就是说，这里 z-index 是负值的图片元素应该在.box 元素的上面。
+    -->
+
+    <style>
+        .box {
+            width: 200px;
+            background-color: blue;
+        }
+
+        .box > img {
+            position: relative;
+            z-index: -1;
+            right: -50px;
+        }
+    </style>
+
+    <style>
+        .box2 {
+            width: 200px;
+            background-color: blue;
+            transform: scale(1);  /*创建新的层叠上下文，使.box2变成层叠上下元素*/
+        }
+
+        .box2 > img {
+            position: relative;
+            z-index: -1;
+            right: -50px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="box">
+    <img src="../images/025.jpg" width="200">
+</div>
+<hr>
+<div class="box2">
+    <img src="../images/025.jpg"  width="200">
+</div>
+</body>
+
+</html>
+

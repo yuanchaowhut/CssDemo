@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS025</title>
+    <!--
+        1、ex 是 CSS 中的一个相对单位，指的是小写字母 x 的高度，没错，就是指 x-height。
+        2、本例不需要使用vetical-align，直接默认的基线对齐即可。
+    -->
+    <link rel="stylesheet" href="../lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../lib/css/font-awesome.min.css">
+    <style>
+        .icon-arrow {
+            display: inline-block;
+            width: 20px;
+            height: 1ex;
+        }
+    </style>
+</head>
+<body>
+<div>
+    Hello World! <i class=" icon-angle-down"></i>
+    <hr>
+    你好，世界! <i class=" icon-angle-down"></i>
+</div>
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS026</title>
+    <!--
+        替换元素：<img>、<input>、<textarea>、<select>、<object>等，这些元素都没有实际的内容；
+        非替换元素：块及元素(div，p等),内联元素(span,a等)；
+
+        1、一个空的div里放入文字后就有了高度，这个高度是被文字的line-height撑开的而不是font-size；
+        2、对于非替换元素的纯内联元素，其可 视高度完全由 line-height 决定。
+        3、内联元素的高度由固定高度和不固定高度组成，这个不固定的部分就是这里的“行距”。换句话说，line-height 之所以起作用，
+           就是通过改变“行距”来 实现的。
+        4、在 CSS 中，“行距”分散在当前文字的上方和下方，也就是即使是第一行文字，其上方也 是有“行距”的，只不过这个“行距”的
+           高度仅仅是完整“行距”高度的一半，因此，也被称为“半 行距”。
+        5、行距 = 行高− em-box。转换成 CSS 语言就是:行距 = line-height - font-size
+        6、line-height 通过控制行距(或者说半行距)实现文字排版
+        7、line-height 不会影响替换元素(如图片的高度)，但是会影响"幽灵空白节点"的高度，在 HTML5 文档模式下，每一个“行框盒子”
+           的前面都有一个宽度为 0 的“幽灵空白节点”，其内联特性表现和普通字符一模一样，所以一个div里边只放置一张图片，然后给div
+           设置 line-height 会发现div被撑开了，其实是被“幽灵空白节点”撑开的而不是图片。
+        8、对于一行内同时存在内联替换元素和内联非替换元素时，line-height 扮演的角色是决定这个行盒的最小高度而不是最终高度，除非
+           line-height 的值设置的够大。
+        9、对于块级元素，line-height 对其本身是没有任何作用的，我们平时改变 line-height， 块级元素的高度跟着变化实际上是通过
+           改变块级元素里面内联级别元素占据的高度实现的。
+       10、line-height 具有几乎无处不在的继承特性，line-height 不仅是内联元素高度的基石，而且还是整个 CSS 世界高度体系的基石。
+       11、line-height 可以让单行或多行元素近似垂直居中！
+            行高可以实现“垂直居中”原因在于 CSS 中“行距的上下等分机制”
+            “近似”是因为文字字形的垂直中线位置普遍要比真正的“行框盒子”的垂直中线位置低。font-size设置的越大，这种差异越明显！
+       12、line-height 属性值可以设置数值、百分比、单位(px,em), 只有设置为数值时，子元素继承的还是数字，其他情况继承的都是
+           计算后的结果值。
+           比如:font-size:16px  line-height:1.5  line-height:150%  line-height:1.5em  line-height:24px  这几种设置
+           方式最终结算结果都是24px，没什么区别，但是对于子元素的继承来说，line-height:1.5 下继承的还是1.5， 而其他几种方式
+           继承的都是24px这个具体的计算值！
+       13、只要有内联盒子就一定有行框盒子，只要有行框盒子就一定有"幽灵空白节点"(HTML5)。
+           如果行框盒子中包含多个内联盒子，那么行框盒子的高度是由高度最高的那个“内联盒子”决定的。这里的"多个内联盒子"一定要把
+           "幽灵空白节点"也考虑进去，因为它是一个宽度为0的具有普通字符一切属性的特殊"字符"，它的高度也受 line-height 控制。
+       14、内联元素可以通过设置 display: inline-block 来避免受到"幽灵空白节点"的影响。因为这会创建一个独立的行框盒子！此时
+           内联元素虽然还是和"幽灵空白节点"在同一行展示，但是父容器的line-height只能影响内联元素本身，不能影响它里边的子元素了，
+           它的子元素只受它自己的line-height影响了！这也是多行文本垂直居中的精髓所在。
+    -->
+
+    <style>
+        .test1 {
+            font-size: 16px;
+            line-height: 0;
+            border: 1px solid #ccc;
+            background: #eee;
+        }
+
+        .test2 {
+            font-size: 0;
+            line-height: 16px;
+            border: 1px solid #ccc;
+            background: #eee;
+        }
+    </style>
+
+    <style>
+        .box{
+            line-height: 300px;
+            background: #cccccc;
+        }
+    </style>
+
+    <style>
+        .parent {
+            background-color: #cd0000;
+        }
+        .child {
+            display: inline-block;
+        }
+    </style>
+
+    <style>
+        .father {
+            width: 280px;
+            line-height: 200px;
+            background-color: #f0f3f9;
+            margin: auto;
+        }
+        .content {
+            display: inline-block;
+            line-height: 20px;
+            margin: 0 20px;
+            text-align: left;
+            vertical-align: middle;
+        }
+    </style>
+
+    <style>
+        .box2 {
+            width: 280px;
+            line-height: 100px;
+            background-color: #f0f3f9;
+            margin: auto;
+        }
+        .content2 {
+            display: inline-block;
+            line-height: 40px;
+            margin: 0 20px;
+            text-align: left;
+            vertical-align: middle;
+        }
+    </style>
+
+    <style>
+        .box3 {
+            width: 280px;
+            line-height: 40px;
+            background-color: #f0f3f9;
+            margin: auto;
+        }
+        .content3 {
+            display: inline-block;
+            line-height: 100px;
+            margin: 0 20px;
+            text-align: left;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <div class="test1">我的高度是?</div>
+    <br>
+    <br>
+    <br>
+
+    <div class="test2">我的高度是?</div>
+    <br>
+    <br>
+    <br>
+
+    <div class="box">
+        <img src="../images/007.jpg" width="200">
+    </div>
+    <br>
+    <br>
+    <br>
+
+    <!--"幽灵空白节点"存在的证明-->
+    <div class="parent">
+        <span class="child"></span>
+    </div>
+    <br>
+    <br>
+    <br>
+
+    <!--line-height和vetical-align实现多行文本垂直居中-->
+    <div class="father">
+        <span class="content">基于行高实现的多行文字垂直居中效果，需要vertical-align属性帮助。</span>
+    </div>
+    <hr>
+    <div class="father">
+        <img class="content" src="../images/008.jpg" height="100">
+    </div>
+    <br>
+    <br>
+    <br>
+
+    <div class="box2">
+        <span class="content2">Hello World</span>
+    </div>
+    <hr>
+    <div class="box3">
+        <span class="content3">Hello World</span>
+    </div>
+</div>
+</body>
+</html>
